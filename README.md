@@ -5,7 +5,7 @@
 ## Members
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* Susau, Arone Tie (s3728977)
 * Dimkovski, Dylan (s3717379)
 * BYRNES, Todd (s3540652)
 
