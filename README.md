@@ -6,7 +6,7 @@
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* Dimkovski, Dylan (s3717379)
 * BYRNES, Todd (s3540652)
 
 ## Records
