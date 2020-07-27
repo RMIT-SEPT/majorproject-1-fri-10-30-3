@@ -4,7 +4,7 @@
 
 ## Members
 * SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* Tein Hwlar Phyu (s3734613)
 * Susau, Arone Tie (s3728977)
 * Dimkovski, Dylan (s3717379)
 * BYRNES, Todd (s3540652)
