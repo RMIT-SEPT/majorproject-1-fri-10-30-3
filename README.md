@@ -3,7 +3,7 @@
 # Group 00
 
 ## Members
-* SURNAME, GivenName (sXXXX)
+* HOU, Man (s3795574)
 * Tein Hwlar Phyu (s3734613)
 * Susau, Arone Tie (s3728977)
 * Dimkovski, Dylan (s3717379)
