@@ -1,3 +1,2 @@
-# SEPT Startup code and  project Structure documentation 
-
-# Quick Start
+# All the files are here
+We will update this folder during the development and each milestone.
