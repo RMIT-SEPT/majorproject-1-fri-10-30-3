@@ -22,9 +22,10 @@ const Home = () => (
         
         {/* Socials */}
         <div className="landing-box-socials">
-          <button>fb</button>
-          <button>insta</button>
-          <button>google</button>
+          <button className="landing-socials"><i className="landing-social-action fab fa-facebook"></i></button>
+          <button className="landing-socials"><i className="landing-social-action fab fa-twitter"></i></button>
+          <button className="landing-socials"><i className="landing-social-action fab fa-instagram"></i></button>
+          <button className="landing-socials"><i className="landing-social-action fab fa-google"></i></button>
         </div>
 
       </div>

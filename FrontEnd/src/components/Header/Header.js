@@ -23,7 +23,7 @@ const Header = () => (
       <div className="header-inner-content login-fields">
         <input type="text" placeholder="Username.."></input>
         <input type="text" placeholder="Password.."></input>
-        <button>Log In</button>
+        <button className="header-login"><i className="header-login-icon fas fa-sign-in-alt"></i></button>
       </div>
     </div>
 
