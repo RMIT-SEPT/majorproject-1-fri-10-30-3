@@ -116,3 +116,25 @@
 .landing-contact {
   background-color: white;
 }
+
+.landing-socials {
+  background-color: transparent;
+  border: none;
+}
+
+.landing-socials:focus {
+  outline: none;
+}
+
+.landing-social-action {
+  color: #fedd5b86;
+  font-size: 2em;
+}
+
+.landing-social-action:hover {
+  color: #fede5b;
+}
+
+.landing-social-action:active {
+  color: #ccb248;
+}
