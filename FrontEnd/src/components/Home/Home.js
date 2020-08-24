@@ -5,7 +5,7 @@ import "./Home.css"
 
 const Home = () => (
   <div>
-    <div className="landing"> {/* LANDING */} 
+    <div id="home" className="landing"> {/* LANDING */} 
     <Header></Header>
     <div className="landing-content">
       <div className="landing-box">
@@ -31,11 +31,11 @@ const Home = () => (
     </div>
     </div>
 
-    <div className="landing-containers landing-services"> {/* SERVICES */} </div>
+    <div id="services" className="landing-containers landing-services"> {/* SERVICES */} </div>
 
-    <div className="landing-containers landing-about-us"> {/* ABOUT US */} </div>
+    <div id="aboutus" className="landing-containers landing-about-us"> {/* ABOUT US */} </div>
 
-    <div className="landing-containers landing-contact"> {/* CONTACT */} </div>
+    <div id="contact" className="landing-containers landing-contact"> {/* CONTACT */} </div>
 
     <Footer></Footer>
   </div>
