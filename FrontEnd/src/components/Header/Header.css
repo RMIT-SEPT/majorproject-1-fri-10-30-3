@@ -76,6 +76,27 @@
   outline: none;
 }
 
+.header-login {
+  background-color: transparent;
+  border: none;
+}
+
+.header-login:focus {
+  outline: none;
+}
+
+.header-login-icon {
+  color: #fedd5bb4;
+}
+
+.header-login-icon:hover {
+  color: #fede5b;
+}
+
+.header-login-icon:active {
+  color: #ccb248;
+}
+
 a:link { 
   text-decoration: none; 
 }
