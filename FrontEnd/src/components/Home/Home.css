@@ -1,0 +1,118 @@
+
+.landing {
+  background-image: url("/landing.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-content {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-box {
+  width: 100%;
+  height: 30%;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  opacity: 1;
+  animation: loadopacity 1s;
+}
+
+@keyframes loadopacity {
+  from {
+    position: relative;
+    right: 10%;
+    opacity: 0;
+  }
+  to {
+    position: relative;
+    right: 0%;
+    opacity: 1;
+  }
+}
+
+.landing-title {
+  font-size: 5em;
+  font-weight: 300;
+  margin: 5px;
+}
+
+.landing-sub-title {
+  color: rgb(225, 225, 225);
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 10px 0 20px 0;
+}
+
+.landing-title span {
+  color: rgb(225, 225, 225);
+}
+
+.landing-containers {
+  height: 100vh;
+  width: 100%;
+  background-color: rebeccapurple;
+  position: relative;
+  z-index: 2;
+}
+
+.landing-box-buttons {
+  display: flex;
+  gap: 20%;
+}
+
+.landing-box-action {
+  width: 150px;
+  height: 30px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.button-solid {
+  border: none;
+  border-radius: 2px;
+  color: black;
+}
+
+.button-solid:active {
+  background-color: transparent;
+  border: 1px solid #fede5b;
+  border-radius: 2px;
+  outline: none;
+}
+
+.button-solid:focus {
+  outline: none;
+}
+
+.button-alt {
+  background-color: transparent;
+  border: 1px solid #fede5b;
+  border-radius: 2px;
+}
+
+.landing-box-socials {
+  margin-top: 25px;
+}
+
+.landing-services {
+  background-color: white;
+}
+
+.landing-about-us {
+  background-color: black;
+}
+
+.landing-contact {
+  background-color: white;
+}
