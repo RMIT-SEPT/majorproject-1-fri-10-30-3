@@ -13,10 +13,10 @@ const Header = () => (
     <div className="header-content links-login">
       {/* Links */}
       <div className="header-inner-content links-container">
-        <p><a href="#" className="links"> Services </a></p><span className="seperator"> | </span>
-        <p><a href="#" className="links"> About Us </a></p><span className="seperator"> | </span>
-        <p><a href="#" className="links"> Contact</ a></p><span className="seperator"> | </span>
-        <p><a href="#" className="links"> Find Us </a></p>
+        <p><a href="/#home" className="links"> Home </a></p><span className="seperator"> | </span>
+        <p><a href="/#services" className="links"> Services </a></p><span className="seperator"> | </span>
+        <p><a href="/#aboutus" className="links"> About Us </a></p><span className="seperator"> | </span>
+        <p><a href="/#contact" className="links"> Contact</ a></p><span className="seperator"> | </span>
       </div>
       
       {/* Login Component */}
