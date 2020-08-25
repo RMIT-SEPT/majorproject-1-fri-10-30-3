@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
+import BookingBar from '../BookingBar/BookingBar'
 import "./Home.css"
 
 const Home = () => (
@@ -32,7 +33,9 @@ const Home = () => (
     </div>
     </div>
 
-    <div id="services" className="landing-containers landing-services"> {/* SERVICES */} </div>
+    <div id="services" className="landing-containers landing-services"> {/* SERVICES */} 
+      <BookingBar></BookingBar>
+    </div>
 
     <div id="aboutus" className="landing-containers landing-about-us"> {/* ABOUT US */} 
       <h1 className="title-style ff-yellow"> About <span>Us</span></h1>

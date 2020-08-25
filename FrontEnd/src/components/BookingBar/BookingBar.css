@@ -1,0 +1,9 @@
+
+.booking-bar-services {
+  display: flex;
+  padding: 10%;
+  gap: 5%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
