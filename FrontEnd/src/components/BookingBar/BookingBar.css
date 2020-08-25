@@ -1,9 +1,51 @@
 
 .booking-bar-services {
   display: flex;
-  padding: 10%;
+  width: 80%;
+  margin: auto;
   gap: 5%;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.booking-error-box {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 20px;
+}
+
+.booking-sad-face {
+  font-size: 3em;
+  margin: 0;
+}
+
+.booking-transiton-container {
+  padding: 1.5% 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-transiton-content {
+  width: 80%;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.booking-transition-icon  {
+  font-size: 7em;
+}
+
+.booking-transition-text {
+  font-size: 2em;
+}
+
+.booking-current {
+  border-bottom: 2px solid #fede5b;
 }

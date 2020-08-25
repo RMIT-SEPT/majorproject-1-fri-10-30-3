@@ -9,10 +9,10 @@ class Service extends Component {
         <div className="service-content">
           
           <div className="service-top-content">
-            <img className="service-image" src={this.props.imageSrc}></img>
+            <img className="service-image" src={this.props.imageSrc} alt={this.props.title}></img>
             
-            <p>{this.props.title}</p>
-            <p>{this.props.description}</p>
+            <p className="ff-off-black service-title">{this.props.title}</p>
+            <p className="ff-off-black service-description">{this.props.description}</p>
           </div>
 
           <div className="service-bottom-content">

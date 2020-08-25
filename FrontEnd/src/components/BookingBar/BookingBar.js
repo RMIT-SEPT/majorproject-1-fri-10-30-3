@@ -80,7 +80,12 @@ class BookingBar extends Component {
       .catch(err => { return {error: true, message: err.message} })
 
     if (raw['error'] !== undefined && raw['error']) {
-      result = (<p>Oops.. Looks like there was an issue getting our services, please try again later.</p>)
+      result = (
+        <div className="booking-error-box">
+          <p className="booking-sad-face">Oh no.. :(</p>
+          <p>Looks like there was an issue getting our services, please try again later.</p>
+        </div>
+      )
     } else {
       result = raw.map(service => {
         return (<Service 
@@ -97,24 +102,40 @@ class BookingBar extends Component {
     return result;
   }
 
+  currentTab(stage) {
+    return "booking-transition-text " + (
+      this.state.stage === stage ? 
+        "booking-current" : 
+        ""
+    )
+  }
+
   render () {
     return (
       <div>
-        <div> {/* Transitional Bar */} </div>
+        <div className="booking-transiton-container"> {/* Transitional Bar */} 
+          <div className="booking-transiton-content">
+            <p className={this.currentTab(0)}>Services</p>
+            <div><i className="ff-gray booking-transition-icon fas fa-angle-double-right"></i></div>
+            <p className={this.currentTab(1)}>Dates</p>
+            <div><i className="ff-gray booking-transition-icon fas fa-angle-double-right"></i></div>
+            <p className={this.currentTab(2)}>Booking</p>
+          </div>
+        </div>
         
         <div> {/* Main Block */} 
         
-        <div className="booking-bar-services" > {/* Services */}
-          {this.state.services}
-        </div>
+          <div id="landing-service-tab" className="booking-bar-services" > {/* Services */}
+            {this.state.services}
+          </div>
 
-        <div> {/* Dates */} </div>
-        
-        <div> {/* Book */} 
-          <div> {/* New Sign Up */} </div>
-          <div> {/* Dates */} </div>
-          <div> {/* Dates */} </div>
-        </div>
+          <div id="landing-date-tab"> {/* Dates */} </div>
+          
+          <div id="landing-booking-tab"> {/* Book */} 
+            <div> {/* New Sign Up */} </div>
+            <div> {/* Dates */} </div>
+            <div> {/* Dates */} </div>
+          </div>
         
         </div>
       </div>
