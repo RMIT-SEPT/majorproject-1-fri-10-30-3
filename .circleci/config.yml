@@ -1,0 +1,15 @@
+version: 2.1
+
+jobs:
+  front-end-testing:
+    docker:
+      - image: circleci/node:14.8.0
+    steps:
+      - checkout
+      - run: cd ./FrontEnd && npm install
+      - run: cd ./FrontEnd && npm test
+      
+workflows:
+  frontend_testing:
+    jobs:
+      - front-end-testing
