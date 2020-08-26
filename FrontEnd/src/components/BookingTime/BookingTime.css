@@ -1,0 +1,13 @@
+.booking-time-selection {
+  width: 92%;
+  height: 40px;
+  padding: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.booking-time-spots {
+  color: rgba(255, 0, 0, 0.6);
+}

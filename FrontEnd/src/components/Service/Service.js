@@ -3,6 +3,17 @@ import './Service.css'
 
 class Service extends Component {
 
+  onClick() {
+    this.props.onClick({
+      id: this.props.id,
+      title: this.props.title,
+      imageSrc: this.props.imageSrc,
+      description: this.props.description,
+      length: this.props.length,
+      cost: this.props.cost,
+    })
+  }
+
   render() {
     return (
       <div className="service-container">
@@ -20,7 +31,7 @@ class Service extends Component {
               <p>{this.props.length}</p>
               <p>{this.props.cost}</p>
             </div>
-            <button className="ff-bg-yellow service-action">Select</button>
+            <button onClick={this.onClick.bind(this)} className="ff-bg-yellow service-action">Select</button>
           </div>
           
         </div>
