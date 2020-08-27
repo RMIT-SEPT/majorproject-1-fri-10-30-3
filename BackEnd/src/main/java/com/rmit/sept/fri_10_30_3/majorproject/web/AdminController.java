@@ -5,10 +5,9 @@ import com.rmit.sept.fri_10_30_3.majorproject.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -18,7 +17,17 @@ public class AdminController {
 
     @PostMapping("")
     public ResponseEntity<Admin> createNewAdmin(@RequestBody Admin admin){
-        Admin newAdmin = adminService.saveOrUpdateCustomer(admin);
+        Admin newAdmin = adminService.saveOrUpdateAdmin(admin);
         return new ResponseEntity<Admin>(admin, HttpStatus.CREATED);
+    }
+
+    @GetMapping("")
+    public Iterable<Admin> getAll() {
+        return adminService.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Admin> getByID(@PathVariable long id){
+        return adminService.findByID(id);
     }
 }

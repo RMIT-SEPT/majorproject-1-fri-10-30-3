@@ -5,4 +5,17 @@ import javax.persistence.*;
 @DiscriminatorValue("admin")
 public class Admin extends Person{
     private String companyName;
+
+    public Admin() {
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+
 }
