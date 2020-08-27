@@ -30,11 +30,11 @@ class BookingConfirm extends Component {
     return (
       <div className="booking-signin-content">
         <p className="booking-signup-title">Sign Up</p>
-        <input className="booking-signup-input" placeholder="First Name"></input>
-        <input className="booking-signup-input" placeholder="Last Name"></input>
-        <input className="booking-signup-input" placeholder="Email"></input>
-        <input className="booking-signup-input" placeholder="Username"></input>
-        <input className="booking-signup-input" placeholder="Password"></input>
+        <input type="text" className="booking-signup-input" placeholder="First Name"></input>
+        <input type="text" className="booking-signup-input" placeholder="Last Name"></input>
+        <input type="email" className="booking-signup-input" placeholder="Email"></input>
+        <input type="text" className="booking-signup-input" placeholder="Username"></input>
+        <input type="password" className="booking-signup-input" placeholder="Password"></input>
         <p className="booking-signup-subtext">Already a member? <span onClick={this.switchToLogin.bind(this)}>Log In</span></p>
         <div className="booking-signup-actions">
           <button className="booking-signup-btn" onClick={this.props.decrementStage}>Back</button>
@@ -51,8 +51,8 @@ class BookingConfirm extends Component {
     return (
       <div className="booking-signin-content">
         <p className="booking-signup-title">Log In</p>
-        <input className="booking-signup-input" placeholder="Username"></input>
-        <input className="booking-signup-input" placeholder="Password"></input>
+        <input type="text" className="booking-signup-input" placeholder="Username"></input>
+        <input type="password" className="booking-signup-input" placeholder="Password"></input>
         <p className="booking-signup-subtext">Need an account? <span onClick={this.switchToSignup.bind(this)} >Sign Up</span></p>
         <div className="booking-signup-actions">
           <button className="booking-signup-btn" onClick={this.props.decrementStage}>Back</button>
