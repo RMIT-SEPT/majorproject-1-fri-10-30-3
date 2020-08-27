@@ -1,3 +1,4 @@
+
 .booking-time-selection {
   width: 92%;
   height: 40px;
@@ -8,6 +9,22 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.15);
 }
 
+.booking-time-selection:hover {
+  background-color: #fedd5b7e;
+  color: black;
+  font-weight: normal;
+}
+
 .booking-time-spots {
-  color: rgba(255, 0, 0, 0.6);
+  font-style: italic;
+}
+
+.booking-odd-row {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+.booking-selected {
+  background-color: #fedd5bcc;
+  color: white;
+  font-weight: bold;
 }

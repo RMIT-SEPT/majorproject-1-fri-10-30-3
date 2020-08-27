@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './BookingBar.css'
 import Service from './../Service/Service'
-import BookingTime from './../BookingTime/BookingTime'
+import BookingDate from './../BookingDate/BookingDate'
+import BookingConfirm from './../BookingConfirm/BookingConfirm'
+
 
 class BookingBar extends Component {
 
@@ -12,100 +14,47 @@ class BookingBar extends Component {
       stage: 0,
       signedIn: false,
       displaySignUp: true,
-      services: (<p><i className="ff-yellow booking-loading-icon fas fa-spinner fa-pulse"></i></p>)
+      services: (<p><i className="ff-yellow booking-loading-icon fas fa-spinner fa-pulse"></i></p>),
+      selectedService: {},
     }
-
   }
 
   incrementStage(data) {
-    this.setState({stage: this.state.stage + 1}) 
+    this.setState({ 
+      stage: this.state.stage + 1,
+      selectedService: data
+    }) 
   }
 
-  decrementStage(data) {
+  decrementStage() {
     this.setState({stage: this.state.stage - 1}) 
-  }
-
-  updateTime() {
-
   }
 
   stageManager() {
     let stage;
 
-    if (this.state.stage === 0) {
-      stage = this.servicesTab()
+    if (this.state.stage === 0) {  
+      stage = (
+        <div id="landing-service-tab" className="booking-bar-services" > {/* Services */}
+          {this.state.services}
+        </div>
+      )
     } else if (this.state.stage === 1) {
-      stage = this.datesTab()
-    } else if (this.state.stage === 2) {
-      stage = this.bookingTab()
+      stage = 
+        <BookingDate 
+          incrementStage={this.incrementStage.bind(this)} 
+          decrementStage={this.decrementStage.bind(this)} 
+          errorBox={this.errorBox.bind(this)}
+          data={this.state.selectedService}
+        />
+    } else if (this.state.stage === 2) {      
+      stage = 
+        <BookingConfirm 
+          decrementStage={this.decrementStage.bind(this)} 
+        />
     } 
 
     return stage;
-  }
-
-  servicesTab() {
-    return (
-      <div id="landing-service-tab" className="booking-bar-services" > {/* Services */}
-        {this.state.services}
-      </div>
-    )
-  }
-
-  datesTab() {
-    return (
-      <div id="landing-date-tab"> {/* Dates */}     
-        <div className="booking-dates-container">
-          <div className="booking-dates-content">
-            <div className="booking-dates-fields">
-              
-              <div>
-                <p className="ff-off-black booking-date-title">Karate Session</p>
-                <p>Please select a date for your booking.</p>
-                <input className="booking-date-picker" type="date" onChange={this.updateTime.bind(this)}></input>
-                <p>Available Instructors</p>
-                <select className="booking-date-instructor">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="opel">Opel</option>
-                  <option value="audi">Audi</option>
-                </select>
-              </div>
-              
-              <div className="booking-dates-actions">
-                <button className="booking-date-btn booking-date-next" onClick={this.incrementStage.bind(this)}>Select</button>
-                <button className="booking-date-btn booking-date-back" onClick={this.decrementStage.bind(this)}>Back</button>
-              </div>
-
-            </div>
-            <div className="booking-dates-time">
-              {/* Temp Data */}
-              <BookingTime time="10:00 am" remaining={4} />
-              <BookingTime time="11:00 am" remaining={4} />
-              <BookingTime time="12:00 am" remaining={4} />
-              <BookingTime time="1:00 pm" remaining={4} />
-              <BookingTime time="2:00 pm" remaining={4} />
-              <BookingTime time="3:00 pm" remaining={4} />
-              <BookingTime time="4:00 pm" remaining={4} />
-              <BookingTime time="5:00 pm" remaining={4} />
-              <BookingTime time="6:00 pm" remaining={4} />
-              <BookingTime time="7:00 pm" remaining={4} />
-              <BookingTime time="8:00 pm" remaining={4} />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  bookingTab() {
-    return (
-      <div id="landing-booking-tab"> {/* Book */} 
-        <div> {/* New Sign Up */} </div>
-        <div> {/* Dates */} </div>
-        <div> {/* Dates */} </div>
-        <button onClick={this.decrementStage.bind(this)}>back</button>
-      </div>
-    )
   }
 
   componentDidMount () {
@@ -172,7 +121,8 @@ class BookingBar extends Component {
       />
     ]
     
-    this.fetchServices("http://slowwly.robertomurray.co.uk/delay/1000/url/http://www.google.co.uk").then(res => {
+    // TODO: Add API to fetch and include relevent request object.
+    this.fetchServices("http://localhost:3000").then(res => {
       this.setState({services: tempServices})  
     })
   }
