@@ -61,6 +61,7 @@
 
 .landing-containers {
   width: 100%;
+  background-color: rebeccapurple;
   position: relative;
   z-index: 2;
 }
@@ -137,45 +138,54 @@
   color: #ccb248;
 }
 
-
-
 .title-style{
   width: 100%;
-  height: auto;
+  text-align: center;
   font-size: 3em;
   font-weight: 200;
-  margin: 5px;
-  justify-content: center;
-  margin-top: 6%;
-  margin-left: 40%;
-  float: left;
+  margin: none;
 }
 
 .title-style span{
   color: rgb(225, 225, 225);
 }
 
-.paragraph{
-  width: 60%;
+.landing-paragraph{
   height: auto;
   font-size: 1em;
   font-weight: 200;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 3%;
-  float: left;
+  margin-top: 50px;
+}
+
+.aboutus-box {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  margin-bottom: 50px;
+}
+
+.contact-container {
+  width: 50%;
+  display: flex;
+  margin: auto;
 }
 
 .contact-box{
   width: 50%;
   height: auto;
-  float: left;
+  margin-bottom: 50px;
+}
+
+.contact-span {
+  color: black !important;
 }
 
 .findus-box{
   width: 50%;
   height: auto;
-  float: left;
 }
 
 .findus-img{
@@ -183,5 +193,4 @@
   height: auto;
   margin-top: 6%;
   margin-left: 10%;
-  float: left;
 }
