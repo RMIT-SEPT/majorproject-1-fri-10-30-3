@@ -138,3 +138,52 @@
 .landing-social-action:active {
   color: #ccb248;
 }
+
+
+
+.title-style{
+  width: 100%;
+  height: auto;
+  font-size: 3em;
+  font-weight: 200;
+  margin: 5px;
+  justify-content: center;
+  margin-top: 6%;
+  margin-left: 40%;
+  float: left;
+}
+
+.title-style span{
+  color: rgb(225, 225, 225);
+}
+
+.paragraph{
+  width: 60%;
+  height: auto;
+  font-size: 1em;
+  font-weight: 200;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 3%;
+  float: left;
+}
+
+.contact-box{
+  width: 50%;
+  height: auto;
+  float: left;
+}
+
+.findus-box{
+  width: 50%;
+  height: auto;
+  float: left;
+}
+
+.findus-img{
+  width: 85%;
+  height: auto;
+  margin-top: 6%;
+  margin-left: 10%;
+  float: left;
+}
