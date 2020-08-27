@@ -50,12 +50,11 @@
   padding-left: 1px;
   border: 1px solid rgb(147, 147, 147);
   border-radius: 2px;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 .booking-date-btn {
   height: 30px;
-  font-family: 'Times New Roman', Times, serif;
+
   border: 1px solid rgb(147, 147, 147);
 }
 
@@ -74,7 +73,6 @@
 .booking-date-instructor {
   width: 100%;
   height: 30px;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 .booking-date-title {

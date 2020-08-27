@@ -26,4 +26,5 @@
 .booking-selected {
   background-color: #fedd5bcc;
   font-weight: bold;
+  transition: 0.2s;
 }

@@ -144,7 +144,7 @@ class BookingDate extends Component {
               
               <div>
                 <p className="ff-off-black booking-date-title">{this.props.data.title}</p>
-                <p>Please select a booking date and time.</p>
+                <p>Please select a booking date</p>
                 <input className="booking-date-picker" type="date" onChange={this.updateTime.bind(this)}></input>
                 <p>Available Instructors</p>
                 <select onChange={this.instructorSelected.bind(this)} className="booking-date-instructor">
