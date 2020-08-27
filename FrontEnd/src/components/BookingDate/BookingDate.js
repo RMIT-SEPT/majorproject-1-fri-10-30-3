@@ -13,19 +13,23 @@ class BookingDate extends Component {
       instructors: [],
       timeSelected: false,
       instructorSelected: false,
+      instructor: null,
+      bookingDate: null,
+      bookingTime: null,
       selectedId: null,
       activateNext: "booking-next-disable"
     }
   }
   
-  timeSelected(id) {
+  timeSelected(id, selectedTime) {
     this.setState({timeSlots: this.state.timeSlots.map(time => {
       const selected = time.props.id === id
 
       if (selected) {
         this.setState({
           timeSelected: true,
-          selectedId: time.props.id
+          selectedId: time.props.id,
+          bookingTime: selectedTime
         })
 
         this.updateInstructors()
@@ -50,6 +54,9 @@ class BookingDate extends Component {
       timeSelected: false,
       instructorSelected: false,
       selectedId: null,
+      instructor: null,
+      bookingDate: null,
+      bookingTime: null,
       activateNext: "booking-next-disable",
       instructors: []
     })
@@ -68,8 +75,12 @@ class BookingDate extends Component {
     })
   }
 
-  updateTime() {
+  updateTime(event) {
     this.dateChanged()
+    
+    this.setState({
+      bookingDate: event.currentTarget.value
+    })
 
     const tempTime = [
       <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={0} id={0} key={0} time="10:00 am" remaining={4} />,
@@ -108,15 +119,19 @@ class BookingDate extends Component {
     })
   }
 
-  instructorSelected() {
+  instructorSelected(event) {
     this.setState({
       instructorSelected: true,
+      instructor: event.currentTarget.value,
       activateNext: ""
     })
   }
 
   nextStage() {
     this.props.data.bookingId = this.state.selectedId
+    this.props.data.instructor = this.state.instructor
+    this.props.data.date = new Date(this.state.bookingDate).toDateString()
+    this.props.data.time = this.state.bookingTime
     this.props.incrementStage(this.props.data)
   }
 
@@ -130,7 +145,7 @@ class BookingDate extends Component {
               <div>
                 <p className="ff-off-black booking-date-title">{this.props.data.title}</p>
                 <p>Please select a booking date and time.</p>
-                <input id="cow" className="booking-date-picker" type="date" onChange={this.updateTime.bind(this)}></input>
+                <input className="booking-date-picker" type="date" onChange={this.updateTime.bind(this)}></input>
                 <p>Available Instructors</p>
                 <select onChange={this.instructorSelected.bind(this)} className="booking-date-instructor">
                   {this.state.instructors}

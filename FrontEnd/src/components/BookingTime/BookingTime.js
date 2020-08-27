@@ -12,7 +12,7 @@ class BookingTime extends Component {
   }
 
   onClick() {
-    this.props.onClick(this.props.id)
+    this.props.onClick(this.props.id, this.props.time)
   }
 
   render() {

@@ -40,8 +40,8 @@
   border-radius: 2px;
   scroll-behavior: smooth;
   overflow: auto;
-  border-top: 1px solid rgba(128, 128, 128, 0.527);
-  border-bottom: 1px solid rgba(128, 128, 128, 0.527);
+  background-color: rgba(128, 128, 128, 0.03);
+  border: 1px solid rgba(128, 128, 128, 0.2);
 }
 
 .booking-date-picker {

@@ -66,7 +66,7 @@ const Home = () => (
           {/* Findus */}
           <h1 className="title-style ff-yellow">Find <span className="contact-span">Us</span></h1>
           <p className="landing-paragraph ff-grey">128, Swanston Street, Melbourne, 3000, Victoria, Australia</p>
-          <img className="findus-img" src="/findus-map.png"></img>
+          <img className="findus-img" alt="map" src="/findus-map.png"></img>
         </div>
       </div>
       

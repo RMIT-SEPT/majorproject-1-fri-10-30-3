@@ -110,6 +110,7 @@
 
 .landing-about-us {
   background-color: black;
+  padding-bottom: 50px;
 }
 
 .landing-contact {
@@ -164,7 +165,6 @@
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  margin-bottom: 50px;
 }
 
 .contact-container {
@@ -176,7 +176,7 @@
 .contact-box{
   width: 50%;
   height: auto;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 .contact-span {

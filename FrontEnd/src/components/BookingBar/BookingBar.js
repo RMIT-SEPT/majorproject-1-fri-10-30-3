@@ -51,6 +51,8 @@ class BookingBar extends Component {
       stage = 
         <BookingConfirm 
           decrementStage={this.decrementStage.bind(this)} 
+          data={this.state.selectedService}
+          loggedIn={this.state.signedIn}
         />
     } 
 
