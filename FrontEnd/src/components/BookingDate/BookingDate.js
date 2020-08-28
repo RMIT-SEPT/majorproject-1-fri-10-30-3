@@ -63,7 +63,7 @@ class BookingDate extends Component {
   }
 
   updateInstructors() {
-    // TODO: Implement fetch request for instructors
+    // TODO: Delete once api ready to intergrate.
     const randomNames = ['Arone Foo', 'Dylan Bar', 'Todd Baz', 'Man Foo', 'Tien Bar', 'Mr Smith', 'Lucy Lu', 'Hey Now']
 
     this.setState({
@@ -82,6 +82,7 @@ class BookingDate extends Component {
       bookingDate: event.currentTarget.value
     })
 
+    // TODO: Delete once api ready to intergrate.
     const tempTime = [
       <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={0} id={0} key={0} time="10:00 am" remaining={4} />,
       <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={1} id={1} key={1} time="11:00 am" remaining={4} />,
@@ -95,8 +96,6 @@ class BookingDate extends Component {
       <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={9} id={9} key={9} time="7:00 pm" remaining={4} />,
       <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={10} id={10} key={10} time="8:00 pm" remaining={4} />
     ]
-
-    
 
     // TODO: Add API to fetch and include relevent request object.
     this.fetchTime("http://localhost:3000").then(res => {
