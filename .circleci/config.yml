@@ -8,8 +8,16 @@ jobs:
       - checkout
       - run: cd ./FrontEnd && npm install
       - run: cd ./FrontEnd && npm test
+  
+  back-end-testing:
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    steps:
+      - checkout
+      - run: cd ./BackEnd && mvn clean test
       
 workflows:
-  frontend_testing:
+  testing_suite:
     jobs:
       - front-end-testing
+      - back-end-testing
