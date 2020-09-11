@@ -17,11 +17,14 @@ class BookingTime extends Component {
 
   render() {
     const selectedColour = "booking-time-selection " + (this.props.selected ? "booking-selected " : "")
+    const time = this.props.time <= 12 ? this.props.time + ":00 am" : (this.props.time - 12) + ":00 pm"
 
     return (
       <div onClick={this.onClick.bind(this)} className={selectedColour + this.state.rowColour}>
-        <div>{this.props.time}</div>
-        <div className="booking-time-spots">{this.props.remaining} Spots</div>
+        <div>
+          <div>{time} - <span className="booking-time-spots">{this.props.remaining} Spots</span></div>
+        </div>
+        <div>{this.props.instructor}</div>
       </div>
     )
   }

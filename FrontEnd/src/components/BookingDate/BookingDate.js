@@ -10,10 +10,7 @@ class BookingDate extends Component {
     this.state = {
       data: props.data,
       timeSlots: [],
-      instructors: [],
       timeSelected: false,
-      instructorSelected: false,
-      instructor: null,
       bookingDate: null,
       bookingTime: null,
       selectedId: null,
@@ -29,10 +26,9 @@ class BookingDate extends Component {
         this.setState({
           timeSelected: true,
           selectedId: time.props.id,
-          bookingTime: selectedTime
+          bookingTime: selectedTime,
+          activateNext: ""
         })
-
-        this.updateInstructors()
       }
       
       return (
@@ -43,6 +39,7 @@ class BookingDate extends Component {
             key={time.key} 
             time={time.props.time} 
             remaining={time.props.remaining} 
+            instructor={time.props.instructor}
           />
         )
       })
@@ -52,26 +49,11 @@ class BookingDate extends Component {
   dateChanged() {
     this.setState({
       timeSelected: false,
-      instructorSelected: false,
       selectedId: null,
       instructor: null,
       bookingDate: null,
       bookingTime: null,
       activateNext: "booking-next-disable",
-      instructors: []
-    })
-  }
-
-  updateInstructors() {
-    // TODO: Delete once api ready to intergrate.
-    const randomNames = ['Arone Foo', 'Dylan Bar', 'Todd Baz', 'Man Foo', 'Tien Bar', 'Mr Smith', 'Lucy Lu', 'Hey Now']
-
-    this.setState({
-      instructors: [
-        <option key={0}>{randomNames[Math.floor(Math.random() * (randomNames.length - 1))]}</option>,
-        <option key={1}>{randomNames[Math.floor(Math.random() * (randomNames.length - 1))]}</option>,
-        <option key={2}>{randomNames[Math.floor(Math.random() * (randomNames.length - 1))]}</option>,
-      ]
     })
   }
 
@@ -82,25 +64,10 @@ class BookingDate extends Component {
       bookingDate: event.currentTarget.value
     })
 
-    // TODO: Delete once api ready to intergrate.
-    const tempTime = [
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={0} id={0} key={0} time="10:00 am" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={1} id={1} key={1} time="11:00 am" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={2} id={2} key={2} time="12:00 am" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={3} id={3} key={3} time="1:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={4} id={4} key={4} time="2:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={5} id={5} key={5} time="3:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={6} id={6} key={6} time="4:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={7} id={7} key={7} time="5:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={8} id={8} key={8} time="6:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={9} id={9} key={9} time="7:00 pm" remaining={4} />,
-      <BookingTime onClick={this.timeSelected.bind(this)} selected={false} index={10} id={10} key={10} time="8:00 pm" remaining={4} />
-    ]
-
-    // TODO: Add API to fetch and include relevent request object.
-    this.fetchTime("http://localhost:3000").then(res => {
-      this.setState({timeSlots: tempTime})  
-    })
+    this.fetchTime("http://localhost:8080/api/schedule")
+      .then(res => {
+        this.setState({timeSlots: res})  
+      })
   }
 
   async fetchTime(url) {
@@ -109,28 +76,35 @@ class BookingDate extends Component {
       .catch(err => { return {error: true, message: err.message} })
     const error = raw['error'] !== undefined && raw['error']
 
-    return error ? this.props.errorBox() : this.mapTime(raw);
+    return error ? this.props.errorBox() : this.flatMapTime(raw);
   }
 
-  mapTime(raw) {
-    return raw.map(data => {
-      return <BookingTime time={data.time} remaining={data.remaining} /> 
-    })
-  }
-
-  instructorSelected(event) {
-    this.setState({
-      instructorSelected: true,
-      instructor: event.currentTarget.value,
-      activateNext: ""
-    })
+  flatMapTime(raw) {
+    return raw
+      .filter(data => data.skills.skills_id === this.props.data.id && data.availability === this.state.bookingDate)
+      .sort((a, b) => {
+        if (a.startingHour > b.startingHour) {
+          return 1
+        } else if (a.startingHour < b.startingHour) {
+          return -1
+        } else {
+          return 0
+        }
+      })
+      .map((data, index) => {
+        return <BookingTime 
+          id={data.scheduleId} 
+          onClick={this.timeSelected.bind(this)} 
+          key={index} 
+          time={data.startingHour} 
+          remaining={data.remaining} 
+          instructor={data.employee.fname + " " + data.employee.lname}
+        /> 
+      })
   }
 
   nextStage() {
     this.props.data.bookingId = this.state.selectedId
-    this.props.data.instructor = this.state.instructor
-    this.props.data.date = new Date(this.state.bookingDate).toDateString()
-    this.props.data.time = this.state.bookingTime
     this.props.incrementStage(this.props.data)
   }
 
@@ -144,22 +118,19 @@ class BookingDate extends Component {
               <div>
                 <p className="ff-off-black booking-date-title">{this.props.data.title}</p>
                 <p>Please select a booking date</p>
-                <input className="booking-date-picker" type="date" onChange={this.updateTime.bind(this)}></input>
-                <p>Available Instructors</p>
-                <select onChange={this.instructorSelected.bind(this)} className="booking-date-instructor">
-                  {this.state.instructors}
-                </select>
-              </div>
-              
-              <div className="booking-dates-actions">
-                <button className={"booking-date-btn booking-date-next " + this.state.activateNext} onClick={this.nextStage.bind(this)}>Select</button>
-                <button className="booking-date-btn booking-date-back" onClick={this.props.decrementStage}>Back</button>
+                <input className="booking-date-picker" type="date" min={(new Date()).toLocaleDateString().split("/").reverse().join("-")} onChange={this.updateTime.bind(this)}></input>
               </div>
 
             </div>
             <div className="booking-dates-time">
               {this.state.timeSlots}
             </div>
+
+            <div className="booking-dates-actions">
+                <button className={"booking-date-btn booking-date-next " + this.state.activateNext} onClick={this.nextStage.bind(this)}>Select</button>
+                <button className="booking-date-btn booking-date-back" onClick={this.props.decrementStage}>Back</button>
+            </div>
+
           </div>
         </div>
       </div>

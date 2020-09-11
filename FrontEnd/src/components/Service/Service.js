@@ -28,8 +28,8 @@ class Service extends Component {
 
           <div className="service-bottom-content">
             <div className="service-bottom-price-length">
-              <p>{this.props.length}</p>
-              <p>{this.props.cost}</p>
+              <p>{this.props.length} hr</p>
+              <p>${this.props.cost}</p>
             </div>
             <button onClick={this.onClick.bind(this)} className="ff-bg-yellow service-action">Select</button>
           </div>

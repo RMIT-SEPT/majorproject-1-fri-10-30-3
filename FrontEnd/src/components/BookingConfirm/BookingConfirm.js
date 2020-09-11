@@ -10,8 +10,38 @@ class BookingConfirm extends Component {
     this.state = {
       loggedIn: props.loggedIn,
       signUp: true,
-      errorElememnt: null
+      errorElememnt: null,
+      instructor: null,
+      date: null,
+      time: null,
     }
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:8080/api/schedule/${this.props.data.bookingId}`)
+      .then(res => res.json())
+      .then(res => this.setState({
+        instructor: res.employee.fname + " " + res.employee.lname,
+        date: res.availability,
+        time: res.startingHour <= 12 ? res.startingHour + ":00 am" : (res.startingHour - 12) + ":00 pm"
+      }))
+  }
+
+  confirmBooking() {
+
+    const data = {
+      customer: { id: 3 },
+      employee_schedule: { scheduleId: this.props.data.bookingId }
+    }
+
+    console.dir(data)
+
+    fetch("http://localhost:8080/api/enrollment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .catch(err => console.dir(err))
   }
 
   switchToLogin() {
@@ -38,7 +68,7 @@ class BookingConfirm extends Component {
         <p className="booking-signup-subtext">Already a member? <span onClick={this.switchToLogin.bind(this)}>Log In</span></p>
         <div className="booking-signup-actions">
           <button className="booking-signup-btn" onClick={this.props.decrementStage}>Back</button>
-          <button className="booking-signup-btn">Sign Up & Book</button>
+          <button onClick={this.confirmBooking.bind(this)} className="booking-signup-btn">Sign Up & Book</button>
         </div>
         <div>
           {this.state.errorElememnt}
@@ -51,8 +81,8 @@ class BookingConfirm extends Component {
     return (
       <div className="booking-signin-content">
         <p className="booking-signup-title">Log In</p>
-        <input type="text" className="booking-signup-input" placeholder="Username"></input>
-        <input type="password" className="booking-signup-input" placeholder="Password"></input>
+        <input required type="text" className="booking-signup-input" placeholder="Username"></input>
+        <input required type="password" className="booking-signup-input" placeholder="Password"></input>
         <p className="booking-signup-subtext">Need an account? <span onClick={this.switchToSignup.bind(this)} >Sign Up</span></p>
         <div className="booking-signup-actions">
           <button className="booking-signup-btn" onClick={this.props.decrementStage}>Back</button>
@@ -101,11 +131,11 @@ class BookingConfirm extends Component {
               <img alt={this.props.data.title} src={this.props.data.imageSrc}></img>
               <p className="booking-summary-sub-title">{this.props.data.title}</p>
               <p className="booking-summary-description">{this.props.data.description}</p>
-              <p className="booking-summary-details" >Instructor: <span>{this.props.data.instructor}</span></p>
-              <p className="booking-summary-details" >Date: <span>{this.props.data.date}, {this.props.data.time}</span></p>
+              <p className="booking-summary-details" >Instructor: <span>{this.state.instructor}</span></p>
+              <p className="booking-summary-details" >Date: <span>{this.state.date}, {this.state.time}</span></p>
               <div className="booking-summary-values-content">
-                <p className="booking-summary-values">{this.props.data.length}</p>
-                <p className="booking-summary-values">{this.props.data.cost}</p>
+                <p className="booking-summary-values">{this.props.data.length} hr</p>
+                <p className="booking-summary-values">${this.props.data.cost}</p>
               </div>
             </div>
             {this.manageCheckoutState()}

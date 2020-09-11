@@ -59,73 +59,9 @@ class BookingBar extends Component {
     return stage;
   }
 
-  componentDidMount () {
-    const tempServices = [
-      <Service 
-      key={1}
-      id={1}
-      title={"Zumba Session"} 
-      description={"Lorem  ipsum  dolor sit am et, consectetur adipiscing elit. Maecenas volutpat eu velit in euism od. Proin vitae egestas ante, ac aliquam  risus. Donec congue m i ut tristique dignissim . Vivam us non diam  ut ligula ornare sem per."} 
-      imageSrc={"/services/zumba.jpg"} 
-      length={"1hr"} 
-      cost={"$90"}
-      onClick={this.incrementStage.bind(this)}
-      />,
-      <Service 
-      key={2}
-      id={2}
-      title={"Karate Session"} 
-      description={"Sed ultrices volutpat nibh vitae scelerisque. Vestibulum  ante ipsum  prim is in faucibus orci luctus et ultrices posuere cubilia curae."} 
-      imageSrc={"/services/karate.jpg"} 
-      length={"1hr"} 
-      cost={"$90"}
-      onClick={this.incrementStage.bind(this)}
-      />,
-      <Service 
-      key={3}
-      id={3}
-      title={"MMA Session"} 
-      description={"Donec et euism od arcu, vel ultrices orci. Mauris nec lorem  id dui luctus lobortis id vel nulla. Suspendisse lacinia dolor et m i venenatis porttitor."} 
-      imageSrc={"/services/mma.jpg"} 
-      length={"1hr"} 
-      cost={"$90"}
-      onClick={this.incrementStage.bind(this)}
-      />,
-      <Service
-      key={4} 
-      id={4}
-      title={"1:1 Coaching"} 
-      description={"Cras porta ferm entum  efficitur. Vestibulum  accum san tem por quam , a congue erat placerat at. Phasellus placerat m assa at ligula feugiat, posuere sem per leo scelerisque. Vestibulum  quis nunc at justo vehicula auctor. "} 
-      imageSrc={"/services/1-1-coaching.jpg"} 
-      length={"1hr"} 
-      cost={"$90"} 
-      onClick={this.incrementStage.bind(this)}
-      />,
-      <Service 
-      key={5}
-      id={5}
-      title={"Running Group"} 
-      description={"In id erat faucibus, pellentesque elit eu, dictum  arcu. Pellentesque tincidunt blandit pellentesque."} 
-      imageSrc={"/services/running.jpg"} 
-      length={"1hr"} 
-      cost={"$90"} 
-      onClick={this.incrementStage.bind(this)}
-      />,
-      <Service 
-      key={6}
-      id={6}
-      title={"Kids Club Exercise"} 
-      description={"Curabitur consequat sem per ex eu feugiat. Nullam  id dui tincidunt, suscipit justo nec, vehicula quam ."} 
-      imageSrc={"/services/kids-club.jpg"} 
-      length={"1hr"} 
-      cost={"$90"} 
-      onClick={this.incrementStage.bind(this)}
-      />
-    ]
-    
-    // TODO: Add API to fetch and include relevent request object.
-    this.fetchServices("http://localhost:3000").then(res => {
-      this.setState({services: tempServices})  
+  componentDidMount () {    
+    this.fetchServices("http://localhost:8080/api/skills").then(res => {
+      this.setState({services: res})  
     })
   }
 
@@ -142,12 +78,14 @@ class BookingBar extends Component {
   mapService(data) {
     return data.map(service => {
       return (<Service 
-        key={service.id}
+        key={service.skills_id}
+        id={service.skills_id}
         title={service.title} 
         description={service.description} 
         imageSrc={service.imageSrc} 
         length={service.length} 
         cost={service.cost} 
+        onClick={this.incrementStage.bind(this)}
       />)
     })
   }
