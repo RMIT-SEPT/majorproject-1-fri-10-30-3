@@ -23,13 +23,6 @@ public class Employee extends Person{
 
     @OneToMany(mappedBy = "employee")
     Set<Employee_Schedule> schedules;
-    //Basic Many-To-Many
-//    @ManyToMany
-//    @JoinTable(
-//            name = "Employee_Schedule",
-//            joinColumns = @JoinColumn(name = "Employee"),
-//            inverseJoinColumns = @JoinColumn(name = "Service_id"))
-//    Set<Service> services;
 
     public String getFname() {
         return fname;
