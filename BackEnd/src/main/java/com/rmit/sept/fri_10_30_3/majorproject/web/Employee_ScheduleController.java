@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/schedule")
+@CrossOrigin(origins = "*")
 public class Employee_ScheduleController {
     @Autowired
     Employee_ScheduleService employee_scheduleService;

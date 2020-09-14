@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/enrollment")
+@CrossOrigin(origins = "*")
 public class EnrollmentController {
     @Autowired
     private EnrollmentService enrollmentService;

@@ -1,6 +1,7 @@
 package com.rmit.sept.fri_10_30_3.majorproject.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +15,13 @@ public class Skills {
 
     private String skills_name;
 
+    //Added on 10/09/2020
+    private String title;
+    private String imageSrc;
+    private String description;
+    private int length;
+    private double cost;
+
     public Set<Employee_Schedule> getSchedules() {
         return schedules;
     }
@@ -23,6 +31,7 @@ public class Skills {
     }
 
     @OneToMany(mappedBy = "skills")
+    @JsonIgnore
     private Set<Employee_Schedule> schedules;
 
     //Basic Many-To-Many
@@ -77,6 +86,47 @@ public class Skills {
     @PreUpdate
     protected void onUpdate() {
         this.updated_At = new Date();
+    }
+
+    //Getter and Setter for the fields that was added on 10/09/2020
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }
 
