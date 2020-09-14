@@ -1,5 +1,7 @@
 package com.rmit.sept.fri_10_30_3.majorproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Customer extends Person{
     private String lname;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     Set<Enrollment> enrollments;
 
     public Customer() {

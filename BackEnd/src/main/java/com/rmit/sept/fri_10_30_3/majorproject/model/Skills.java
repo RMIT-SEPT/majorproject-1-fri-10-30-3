@@ -1,6 +1,7 @@
 package com.rmit.sept.fri_10_30_3.majorproject.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,6 +31,7 @@ public class Skills {
     }
 
     @OneToMany(mappedBy = "skills")
+    @JsonIgnore
     private Set<Employee_Schedule> schedules;
 
     //Basic Many-To-Many
