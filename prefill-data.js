@@ -84,23 +84,24 @@ window.setTimeout(() => {
     }
   }
   
+  const today = (new Date()).getDate();
   
   post("http://localhost:8080/api/schedule", [
-    schedule(1, 1, "2020-09-11", 10),
-    schedule(1, 1, "2020-09-11", 12),
-    schedule(1, 1, "2020-09-11", 14),
-    schedule(1, 1, "2020-09-11", 16),
-    schedule(1, 1, "2020-09-11", 18),
-    schedule(1, 2, "2020-09-11", 9),
-    schedule(1, 2, "2020-09-11", 13),
-    schedule(1, 2, "2020-09-11", 15),
-    schedule(1, 2, "2020-09-11", 17),
+    schedule(1, 1, `2020-09-${today}`, 10),
+    schedule(1, 1, `2020-09-${today}`, 12),
+    schedule(1, 1, `2020-09-${today}`, 14),
+    schedule(1, 1, `2020-09-${today}`, 16),
+    schedule(1, 1, `2020-09-${today}`, 18),
+    schedule(1, 2, `2020-09-${today}`, 9),
+    schedule(1, 2, `2020-09-${today}`, 13),
+    schedule(1, 2, `2020-09-${today}`, 15),
+    schedule(1, 2, `2020-09-${today}`, 17),
 
-    schedule(2, 1, "2020-09-11", 10),
-    schedule(2, 1, "2020-09-11", 14),
-    schedule(2, 1, "2020-09-11", 18),
-    schedule(2, 2, "2020-09-11", 9),
-    schedule(2, 2, "2020-09-11", 15),
+    schedule(2, 1, `2020-09-${today}`, 10),
+    schedule(2, 1, `2020-09-${today}`, 14),
+    schedule(2, 1, `2020-09-${today}`, 18),
+    schedule(2, 2, `2020-09-${today}`, 9),
+    schedule(2, 2, `2020-09-${today}`, 15),
   ])
 }, 1000)
 
