@@ -1,0 +1,142 @@
+.admin-dashboard-container {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+}
+
+.admin-dashboard-contents {
+  width: 80%;
+  height: 75%;
+  padding: 50px;
+  padding-bottom: 80px;
+  background-color: white;
+  box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3;
+  gap: 5%;
+}
+
+.admin-dashboard-action-container {
+  flex: 1;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.admin-dashboard-action-container a {
+  text-align: center;
+  flex: 1;
+  padding: 20px;
+  border: 1px solid lightseagreen;
+  border-radius: 2px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(32, 178, 171, 1);
+  transition: 0.5s;
+}
+
+.admin-dashboard-action-container a span {
+  text-align: center;
+}
+
+.admin-dashboard-action-container a:hover {
+  background-color: rgba(32, 178, 171, 0.5);
+  transition: 0.5s;
+}
+
+.admin-dashboard-action-container a:active {
+  background-color: white;
+  color: lightseagreen;
+  transition: 0.5s;
+}
+
+.admin-dashboard-tabs {
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  border: 1px solid lightgray;
+}
+
+.admin-dashboard-tabs div {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-dashboard-tabs div:hover {
+  cursor: pointer;
+  background-color: #fedd5b79;
+  color: white;
+}
+
+.admin-dashboard-tabs div:active {
+  cursor: pointer;
+}
+
+.admin-dashboard-tables-container {
+  flex: 1;
+  height: 90%;
+}
+
+.admin-dashboard-active {
+  background-color: #f7d758;
+  color: white;
+  font-weight: bold;
+}
+
+.admin-dashboard-title {
+  height: 5%;
+  margin-bottom: 2.5%;
+}
+
+.admin-dashboard-title h1 {
+  margin: 0;
+}
+
+.admin-dashboard-tables-container table {
+  width: 100%;
+  display: table;
+  overflow: auto;
+  border-collapse: collapse;;
+}
+
+.admin-dashboard-table-content {
+  height: 90%;
+  overflow: auto;
+}
+
+.admin-dashboard-tables-container table * {
+  padding: 10px;
+}
+
+.admin-dashboard-heading {
+  background-color: rgb(51, 51, 51);
+  color: white;
+}
+
+.admin-dashboard-tables-container table tr:nth-child(even) {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.admin-dashboard-row:hover {
+  cursor: pointer;
+}
+
+.admin-dashboard-tables-container table tr:hover {
+  background-color: rgba(25, 25, 25, 0.6);
+  transition: 0.3s;
+  color: whitesmoke;
+}
+
+.admin-dashboard-tables-container table tr:active {
+  background-color: rgba(25, 25, 25, 0.8);
+}

@@ -34,8 +34,6 @@ class BookingConfirm extends Component {
       employee_schedule: { scheduleId: this.props.data.bookingId }
     }
 
-    console.dir(data)
-
     fetch("http://localhost:8080/api/enrollment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

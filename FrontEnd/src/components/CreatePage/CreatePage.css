@@ -1,0 +1,108 @@
+
+.create-page-container {
+  width: 100vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+}
+
+.create-page-contents {
+  width: 50%;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3;
+}
+
+.create-page-title-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-page-title-content button {
+  width: 40px;
+  height: 40px;
+ }
+
+.create-page-title-content button, .create-page-title-content * {
+  border: none;
+  background-color: white;
+  font-size: 30px;
+}
+
+.create-page-title-content i {
+  color: grey;
+  transition: 0.5s;
+}
+
+.create-page-title-content i:hover {
+  color: #B3B3B3;
+  transition: 0.5s;
+}
+
+.create-page-title-content i:active {
+  color: black;
+}
+
+.create-page-title-content button:focus {
+  outline: none;
+}
+
+.create-page-contents h1 {
+  margin-top: 0px;
+  margin-bottom: 50px;
+}
+
+.create-page-actions {
+  display: flex;
+  margin-top: 50px;
+  gap: 10%;
+}
+
+.create-page-actions * {
+  width: 30%;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  border-radius: 2px;
+  background-color: white;
+  font-size: 16px;
+}
+
+.create-page-edit {
+  border: 2px solid #fede5b;
+  color: #fede5b;
+}
+
+.create-page-delete {
+  border: 2px solid crimson;
+  color: crimson;
+}
+
+.create-page-fields {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+}
+
+.create-page-input:valid {
+  border-color: #bfdcae;
+  transition: 1s;
+}
+
+.create-page-input:focus, .create-page-actions * {
+  outline: none;
+}
+
+.create-page-actions *:hover {
+  opacity: 0.4;
+}
+
+.create-page-input {
+  height: 40px;
+  border: none;
+  border-bottom: 2px solid black;
+}
