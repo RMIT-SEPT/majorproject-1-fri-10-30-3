@@ -117,7 +117,6 @@ class AdminDashboard extends Component {
       </div>
     )
   }
-
 }
 
 export default AdminDashboard
