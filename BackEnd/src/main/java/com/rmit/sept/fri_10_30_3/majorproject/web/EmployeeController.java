@@ -49,6 +49,7 @@ public class EmployeeController {
         Optional<Employee> e = employeeService.findByID(id);
         //Check if the employee exists or not
         if(e.isPresent()){
+            e.get().setId(id);
             e.get().setFname(employee.getFname());
             e.get().setLname(employee.getLname());
             employeeService.saveOrUpdateEmployee(e.get());

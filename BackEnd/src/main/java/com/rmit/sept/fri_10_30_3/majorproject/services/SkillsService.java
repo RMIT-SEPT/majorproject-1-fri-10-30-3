@@ -13,11 +13,13 @@ public class SkillsService {
     private SkillsRepository skillsRepository;
 
     public Skills saveOrUpdateService(Skills skills){
-        //skills.getSchedules().forEach(employee_schedule -> employee_schedule.setSkills(skills));
         return skillsRepository.save(skills);
     }
 
     public Iterable<Skills> findAll(){return skillsRepository.findAll();}
 
     public Optional<Skills> findByID(long id){return skillsRepository.findById(id);}
+
+    public Optional<Skills> deleteBySkillId(long id){return  skillsRepository.deleteBySkillId(id);}
+
 }

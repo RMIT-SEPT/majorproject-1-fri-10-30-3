@@ -11,9 +11,9 @@ import java.util.Set;
 public class Skills {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long skills_id;
+    private long skillId;
 
-    private String skills_name;
+    private String skillsName;
 
     //Added on 10/09/2020
     private String title;
@@ -22,17 +22,17 @@ public class Skills {
     private int length;
     private double cost;
 
-    public Set<Employee_Schedule> getSchedules() {
+    public Set<EmployeeSchedule> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(Set<Employee_Schedule> schedules) {
+    public void setSchedules(Set<EmployeeSchedule> schedules) {
         this.schedules = schedules;
     }
 
-    @OneToMany(mappedBy = "skills")
+    @OneToMany(mappedBy = "skills", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<Employee_Schedule> schedules;
+    private Set<EmployeeSchedule> schedules;
 
     //Basic Many-To-Many
 //    @ManyToMany(mappedBy = "services")
@@ -46,20 +46,20 @@ public class Skills {
     @JsonFormat(pattern ="yyyy-MM-dd")
     private Date updated_At;
 
-    public long getSkills_id() {
-        return skills_id;
+    public long getSkillId() {
+        return skillId;
     }
 
-    public void setSkills_id(long service_id) {
-        this.skills_id = service_id;
+    public void setSkillId(long service_id) {
+        this.skillId = service_id;
     }
 
-    public String getSkills_name() {
-        return skills_name;
+    public String getSkillsName() {
+        return skillsName;
     }
 
-    public void setSkills_name(String service_name) {
-        this.skills_name = service_name;
+    public void setSkillsName(String service_name) {
+        this.skillsName = service_name;
     }
 
     public Date getCreated_At() {

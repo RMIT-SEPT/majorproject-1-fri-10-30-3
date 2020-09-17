@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-public class Employee_Schedule {
+public class EmployeeSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long scheduleId;
@@ -69,7 +69,7 @@ public class Employee_Schedule {
         this.availability = availability;
     }
 
-    public Employee_Schedule() {
+    public EmployeeSchedule() {
     }
 
 

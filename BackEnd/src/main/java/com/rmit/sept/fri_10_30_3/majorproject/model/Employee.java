@@ -15,17 +15,17 @@ public class Employee extends Person{
     public Employee() {
     }
 
-    public Set<Employee_Schedule> getSchedules() {
+    public Set<EmployeeSchedule> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(Set<Employee_Schedule> schedules) {
+    public void setSchedules(Set<EmployeeSchedule> schedules) {
         this.schedules = schedules;
     }
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    Set<Employee_Schedule> schedules;
+    Set<EmployeeSchedule> schedules;
 
     public String getFname() {
         return fname;

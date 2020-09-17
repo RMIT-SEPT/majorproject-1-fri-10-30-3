@@ -19,4 +19,13 @@ public class EnrollmentService {
     public Iterable<Enrollment> findAll(){return enrollmentRepostiory.findAll();}
 
     public Optional<Enrollment> findByID(long id){return enrollmentRepostiory.findById(id);}
+
+    public Iterable<Enrollment> findByEmployeeSchedule_ScheduleId(long id){
+        return enrollmentRepostiory.findByEmployeeSchedule_ScheduleId(id);
+    }
+
+    public Iterable<Enrollment> findByCustomer_Id(long id){
+        return enrollmentRepostiory.findByCustomer_Id(id);
+    }
+
 }
