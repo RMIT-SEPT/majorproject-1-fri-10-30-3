@@ -11,7 +11,7 @@ public class Customer extends Person{
     private String fname;
     private String lname;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     Set<Enrollment> enrollments;
 

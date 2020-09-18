@@ -1,9 +1,7 @@
 package com.rmit.sept.fri_10_30_3.majorproject.web;
 
 import com.rmit.sept.fri_10_30_3.majorproject.model.Enrollment;
-import com.rmit.sept.fri_10_30_3.majorproject.model.Skills;
 import com.rmit.sept.fri_10_30_3.majorproject.services.EnrollmentService;
-import com.rmit.sept.fri_10_30_3.majorproject.services.SkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +30,15 @@ public class EnrollmentController {
     @GetMapping("{id}")
     public Optional<Enrollment> getByID(@PathVariable long id){
         return enrollmentService.findByID(id);
+    }
+
+    @GetMapping("/schedule/{id}")
+    public Iterable<Enrollment> findByEmployeeSchedule_ScheduleId(@PathVariable long id){
+        return enrollmentService.findByEmployeeSchedule_ScheduleId(id);
+    }
+
+    @GetMapping("/customer/{id}")
+    public Iterable<Enrollment> findByCustomer_Id(@PathVariable long id){
+        return enrollmentService.findByCustomer_Id(id);
     }
 }

@@ -25,7 +25,7 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "Schedule_id")
-    private Employee_Schedule employee_schedule;
+    private EmployeeSchedule employeeSchedule;
 
     private String info;
 
@@ -62,12 +62,12 @@ public class Enrollment {
         this.customer = customer;
     }
 
-    public Employee_Schedule getEmployee_schedule() {
-        return employee_schedule;
+    public EmployeeSchedule getEmployeeSchedule() {
+        return employeeSchedule;
     }
 
-    public void setEmployee_schedule(Employee_Schedule employee_schedule) {
-        this.employee_schedule = employee_schedule;
+    public void setEmployeeSchedule(EmployeeSchedule employee_schedule) {
+        this.employeeSchedule = employee_schedule;
     }
 
     public String getInfo() {

@@ -6,4 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface EnrollmentRepostiory extends CrudRepository<Enrollment,Long> {
     @Override
     Iterable<Enrollment> findAllById(Iterable<Long> iterable);
+
+    Iterable<Enrollment> findByCustomer_Id(long id);
+    Iterable<Enrollment> findByEmployeeSchedule_ScheduleId(long id);
 }
