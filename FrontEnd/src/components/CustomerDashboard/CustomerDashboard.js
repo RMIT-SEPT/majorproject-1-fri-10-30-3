@@ -96,7 +96,7 @@ class CustomerDashboard extends Component {
               <div className="customer-dashboard-data">
                   <p className="customer-dashboard-title">Password</p>
                   <p className="customer-dashboard-title">Address</p>
-                  <p className="customer-dashboard-title">UserName</p>
+                  <p className="customer-dashboard-title">Phone Number</p>
                 </div>
                 <div className="customer-dashboard-data">
                   <p>{this.state.password}</p>
