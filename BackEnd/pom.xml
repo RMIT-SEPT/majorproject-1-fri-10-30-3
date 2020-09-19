@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.rmit.sept.fri_10_30_3</groupId>
-    <artifactId>majorproject</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>majorproject</name>
+    <artifactId>major-project-team3</artifactId>
+    <version>0.0.1</version>
+    <name>Team3</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
