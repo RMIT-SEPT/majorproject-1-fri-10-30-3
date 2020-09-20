@@ -6,27 +6,39 @@ orbs:
 
 jobs:
   front-end-testing:
-    run_tests:
-      working_directory: ~/FrontEnd
-      docker:
-        - image: circleci/node:14.8.0
-      steps:
-        - checkout
-        - run:
-            name: update-npm
-            command: 'sudo npm install -g npm@latest'
-        - restore_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-        - run:
-            name: npm-install
-            command: npm install
-        - save_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-            paths:
-              - ./node_modules
-        - run:
-            name: test
-            command: npm test
+    docker:
+      - image: circleci/node:14.8.0
+    environment:
+      ECR_REPOSITORY_NAME: front-end
+      FULL_IMAGE_NAME: 555572087328.dkr.ecr.us-east-1.amazonaws.com/front-end:latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache: 
+          key: v1-dependencies-{{ checksum "./FrontEnd/package.json" }}
+      - run: cd ./FrontEnd/ && npm install
+      - save_cache: 
+          paths:
+              - ./FrontEnd/node_modules
+              - ./FrontEnd/.npm
+              - ./FrontEnd/.cache
+          key: v1-dependencies-{{ checksum "./FrontEnd/package.json" }}
+      - run:
+          name: Install dependencies for AWS
+          command: |
+            sudo apt-get update
+            sudo apt-get -y -qq install awscli
+            sudo apt-get install python3-pip
+            sudo pip3 install --upgrade awscli
+      - run:
+          name: Build image
+          command: |
+            cd ./FrontEnd && docker build -t $FULL_IMAGE_NAME .
+      - run:
+          name: Push image
+          command: |
+            cd ./FrontEnd && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 555572087328.dkr.ecr.us-east-1.amazonaws.com
+            docker push $FULL_IMAGE_NAME
   
   back-end-build_and_deploy:
     docker:
