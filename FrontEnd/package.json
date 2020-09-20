@@ -4,8 +4,8 @@
   "private": true,
   "devDependencies": {
     "@testing-library/react": "^9.4.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
     "jsdom": "15.2.1",
     "jsdom-global": "3.0.2",
     "react-scripts": "^3.4.3"
@@ -14,8 +14,10 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-redux": "^7.0.2",
-    "redux": "^4.0.1"
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

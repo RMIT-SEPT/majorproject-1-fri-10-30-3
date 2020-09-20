@@ -1,0 +1,107 @@
+
+.header-container {
+  /* background-color: rgb(51, 51, 51); */
+  background-color: transparent;
+  padding: 10px 20px;
+  height: 50px;
+  display: flex;
+}
+
+.header-content {
+  border-bottom: 1px solid gray;  
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 1em;
+}
+
+.header-content.logo-title {
+  justify-content: left;
+  flex-grow: 0;
+}
+
+.header-content.links-login {
+  justify-content: flex-end;
+  flex-grow: 3;
+}
+
+.header-content.links-container {
+  justify-content: flex-end;
+}
+
+.header-content .title {
+  white-space: nowrap;
+}
+
+.header-content .title span {
+  color: white;
+}
+
+.header-content .links {
+  font-size: 0.8em;
+  color: white;
+}
+
+.header-content .seperator {
+  position: relative;
+  color: rgb(105, 97, 71);
+  top: 18px;
+}
+
+.header-inner-content {
+  padding: 10px;
+  gap: 1em;
+}
+
+.header-inner-content.links-container {
+  display: flex;
+}
+
+.header-inner-content.login-fields {
+  display: flex;
+  gap: 5px;
+}
+
+.header-inner-content.login-fields input {
+  background-color: transparent;
+  border: 1px solid rgba(250, 223, 129, 0.5);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3px;
+}
+
+.header-inner-content.login-fields input:focus {
+  outline: none;
+}
+
+.header-login {
+  background-color: transparent;
+  border: none;
+}
+
+.header-login:focus {
+  outline: none;
+}
+
+.header-login-icon {
+  color: #fedd5bb4;
+}
+
+.header-login-icon:hover {
+  color: #fede5b;
+}
+
+.header-login-icon:active {
+  color: #ccb248;
+}
+
+a:link { 
+  text-decoration: none; 
+}
+
+.logo {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}

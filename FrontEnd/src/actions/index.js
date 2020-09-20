@@ -1,22 +1,13 @@
-let nextTodoId = 0;
-export const addTodo = text => ({
-  type: "ADD_TODO",
-  id: nextTodoId++,
-  text
-});
+import { GET_ERRORS } from "./types";
 
-export const setVisibilityFilter = filter => ({
-  type: "SET_VISIBILITY_FILTER",
-  filter
-});
-
-export const toggleTodo = id => ({
-  type: "TOGGLE_TODO",
-  id
-});
-
-export const VisibilityFilters = {
-  SHOW_ALL: "SHOW_ALL",
-  SHOW_COMPLETED: "SHOW_COMPLETED",
-  SHOW_ACTIVE: "SHOW_ACTIVE"
+export const createAccount = (info, history) => async dispatch => {
+  try {
+    const res = await fetch.post("http://localhost:8080/api/person", person);
+    history.push("/dashboard");
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
+  }
 };

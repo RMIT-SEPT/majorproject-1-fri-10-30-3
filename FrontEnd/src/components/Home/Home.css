@@ -1,0 +1,195 @@
+
+.landing {
+  background-image: url("/landing.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-content {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-box {
+  width: 100%;
+  height: 30%;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  opacity: 1;
+  animation: loadopacity 1s;
+}
+
+@keyframes loadopacity {
+  from {
+    position: relative;
+    right: 10%;
+    opacity: 0;
+  }
+  to {
+    position: relative;
+    right: 0%;
+    opacity: 1;
+  }
+}
+
+.landing-title {
+  font-size: 5em;
+  font-weight: 300;
+  margin: 5px;
+}
+
+.landing-sub-title {
+  color: rgb(225, 225, 225);
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 10px 0 20px 0;
+}
+
+.landing-title span {
+  color: rgb(225, 225, 225);
+}
+
+.landing-containers {
+  width: 100%;
+  background-color: rebeccapurple;
+  position: relative;
+  z-index: 2;
+}
+
+.landing-box-buttons {
+  display: flex;
+  gap: 20%;
+}
+
+.landing-box-action {
+  width: 150px;
+  height: 30px;
+}
+
+.button-solid {
+  border: none;
+  border-radius: 2px;
+  color: black;
+}
+
+.button-solid:active {
+  background-color: transparent;
+  border: 1px solid #fede5b;
+  border-radius: 2px;
+  outline: none;
+}
+
+.button-solid:focus {
+  outline: none;
+}
+
+.button-alt {
+  background-color: transparent;
+  border: 1px solid #fede5b;
+  border-radius: 2px;
+}
+
+.landing-box-socials {
+  margin-top: 25px;
+}
+
+.landing-services {
+  background-color: whitesmoke;
+}
+
+.landing-about-us {
+  background-color: black;
+  padding-bottom: 50px;
+}
+
+.landing-contact {
+  background-color: white;
+}
+
+.landing-socials {
+  background-color: transparent;
+  border: none;
+}
+
+.landing-socials:focus {
+  outline: none;
+}
+
+.landing-social-action {
+  color: #fedd5b86;
+  font-size: 2em;
+}
+
+.landing-social-action:hover {
+  color: #fede5b;
+}
+
+.landing-social-action:active {
+  color: #ccb248;
+}
+
+.title-style{
+  width: 100%;
+  text-align: center;
+  font-size: 3em;
+  font-weight: 200;
+  margin: none;
+}
+
+.title-style span{
+  color: rgb(225, 225, 225);
+}
+
+.landing-paragraph{
+  height: auto;
+  font-size: 1em;
+  font-weight: 200;
+  margin-top: 50px;
+}
+
+.aboutus-box {
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+.contact-container {
+  width: 50%;
+  display: flex;
+  margin: auto;
+}
+
+.contact-box{
+  width: 75%;
+  height: auto;
+  padding-bottom: 50px;
+}
+
+.contact-span {
+  color: black !important;
+}
+
+.findus-box{
+  width: 50%;
+  height: auto;
+}
+
+.findus-img{
+  width: 85%;
+  height: auto;
+  margin-top: 6%;
+  margin-left: 10%;
+}
