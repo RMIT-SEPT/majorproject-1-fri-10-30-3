@@ -6,12 +6,27 @@ orbs:
 
 jobs:
   front-end-testing:
-    docker:
-      - image: circleci/node:14.8.0
-    steps:
-      - checkout
-      - run: cd ./FrontEnd && npm install
-      - run: cd ./FrontEnd && npm test
+    run_tests:
+      working_directory: ~/FrontEnd
+      docker:
+        - image: circleci/node:14.8.0
+      steps:
+        - checkout
+        - run:
+            name: update-npm
+            command: 'sudo npm install -g npm@latest'
+        - restore_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+        - run:
+            name: npm-install
+            command: npm install
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+            paths:
+              - ./node_modules
+        - run:
+            name: test
+            command: npm test
   
   back-end-build_and_deploy:
     docker:
@@ -67,7 +82,10 @@ jobs:
 workflows:
   testing_suite:
     jobs:
-      - front-end-testing
+      - front-end-testing:
+          filters:
+            branches:
+              only: frontend-docker
       - back-end-build_and_deploy:
           filters:
             branches:
