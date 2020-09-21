@@ -55,11 +55,11 @@ class CustomerDashboard extends Component {
           onClick={() => { this.props.history.push(`/read/booking/${b.enrollmentId}`) }} 
           key={i}
         >
-          <td>{b.employee_schedule.availability}</td>
-          <td>{this.convertTime(b.employee_schedule.startingHour)}</td>
+          <td>{b.employeeSchedule.availability}</td>
+          <td>{this.convertTime(b.employeeSchedule.startingHour)}</td>
           <td>{b.enrollmentId}</td>
-          <td>{b.employee_schedule.employee.fname + " " + b.employee_schedule.employee.lname}</td>
-          <td>{b.employee_schedule.skills.title}</td>
+          <td>{b.employeeSchedule.employee.fname + " " + b.employeeSchedule.employee.lname}</td>
+          <td>{b.employeeSchedule.skills.title}</td>
         </tr>
       )
     })
