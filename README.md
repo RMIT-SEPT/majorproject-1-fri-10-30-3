@@ -13,7 +13,8 @@
 
 * Github repository : https://github.com/RMIT-SEPT/majorproject-1-fri-10-30-3
 * ClickUp Workspace : https://app.clickup.com/6916834/v/l/s/6941027
-
+* Back-End Website: http://54.210.18.102:8080/api/employee
+* Front-End Website: http://34.207.143.47/
 
 ## Code documentation
 
