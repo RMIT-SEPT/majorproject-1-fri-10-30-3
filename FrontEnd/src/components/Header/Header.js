@@ -20,7 +20,7 @@ class Header extends Component {
           <p><a href="/#services" className="links"> Services </a></p><span className="seperator"> | </span>
           <p><a href="/#aboutus" className="links"> About Us </a></p><span className="seperator"> | </span>
           <p><a href="/#contact" className="links"> Contact</ a></p><span className="seperator"> | </span>
-          <p><Link to="/dashboard/customer/2" className="links"> Customer</ Link></p><span className="seperator"> | </span>
+          <p><Link to="/dashboard/customer/3" className="links"> Customer</ Link></p><span className="seperator"> | </span>
           <p><Link to="/dashboard/admin" className="links"> Admin</ Link></p><span className="seperator"> | </span>
         </div>
         
