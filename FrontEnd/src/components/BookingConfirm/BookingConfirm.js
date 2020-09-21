@@ -32,10 +32,10 @@ class BookingConfirm extends Component {
 
     const data = {
       customer: { id: 3 },
-      employee_schedule: { scheduleId: this.props.data.bookingId }
+      employeeSchedule: { scheduleId: this.props.data.bookingId }
     }
 
-    fetch(`${config}enrollment`, {
+    fetch(`${config.base}enrollment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)

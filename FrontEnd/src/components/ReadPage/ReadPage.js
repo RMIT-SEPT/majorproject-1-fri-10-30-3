@@ -88,7 +88,7 @@ class ReadPage extends Component {
           break
         case 'skills': data = data.skillId
           break
-        case 'employee_schedule': data = data.scheduleId
+        case 'employeeSchedule': data = data.scheduleId
           break
         default: data = null
       }
