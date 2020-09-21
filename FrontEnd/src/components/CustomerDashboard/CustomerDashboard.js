@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./CustomerDashboard.css"
 import { Link } from "react-router-dom";
+import config from "../../config";
 
 class CustomerDashboard extends Component {
 
@@ -26,7 +27,7 @@ class CustomerDashboard extends Component {
   }
 
   updateCustomerDetails() {
-    fetch(`http://localhost:8080/api/customer/${this.state.id}`)
+    fetch(`${config.base}customer/${this.state.id}`)
       .then(res => res.json())
       .then(res => {
         this.setState(res)
@@ -34,7 +35,7 @@ class CustomerDashboard extends Component {
   }
 
   updateBookingRecords() {
-    fetch(`http://localhost:8080/api/enrollment`)
+    fetch(`${config.base}enrollment`)
       .then(res => res.json())
       .then(res => {
         const filtered = res.filter(b => b.customer.id === this.state.id)
@@ -54,11 +55,11 @@ class CustomerDashboard extends Component {
           onClick={() => { this.props.history.push(`/read/booking/${b.enrollmentId}`) }} 
           key={i}
         >
-          <td>{b.employee_schedule.availability}</td>
-          <td>{this.convertTime(b.employee_schedule.startingHour)}</td>
+          <td>{b.employeeSchedule.availability}</td>
+          <td>{this.convertTime(b.employeeSchedule.startingHour)}</td>
           <td>{b.enrollmentId}</td>
-          <td>{b.employee_schedule.employee.fname + " " + b.employee_schedule.employee.lname}</td>
-          <td>{b.employee_schedule.skills.title}</td>
+          <td>{b.employeeSchedule.employee.fname + " " + b.employeeSchedule.employee.lname}</td>
+          <td>{b.employeeSchedule.skills.title}</td>
         </tr>
       )
     })

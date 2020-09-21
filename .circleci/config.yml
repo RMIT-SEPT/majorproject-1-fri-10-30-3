@@ -8,10 +8,37 @@ jobs:
   front-end-testing:
     docker:
       - image: circleci/node:14.8.0
+    environment:
+      ECR_REPOSITORY_NAME: front-end
+      FULL_IMAGE_NAME: 555572087328.dkr.ecr.us-east-1.amazonaws.com/front-end:latest
     steps:
       - checkout
-      - run: cd ./FrontEnd && npm install
-      - run: cd ./FrontEnd && npm test
+      - setup_remote_docker
+      - restore_cache: 
+          key: v1-dependencies-{{ checksum "./FrontEnd/package.json" }}
+      - run: cd ./FrontEnd/ && npm install
+      - save_cache: 
+          paths:
+              - ./FrontEnd/node_modules
+              - ./FrontEnd/.npm
+              - ./FrontEnd/.cache
+          key: v1-dependencies-{{ checksum "./FrontEnd/package.json" }}
+      - run:
+          name: Install dependencies for AWS
+          command: |
+            sudo apt-get update
+            sudo apt-get -y -qq install awscli
+            sudo apt-get install python3-pip
+            sudo pip3 install --upgrade awscli
+      - run:
+          name: Build image
+          command: |
+            cd ./FrontEnd && docker build -t $FULL_IMAGE_NAME .
+      - run:
+          name: Push image
+          command: |
+            cd ./FrontEnd && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 555572087328.dkr.ecr.us-east-1.amazonaws.com
+            docker push $FULL_IMAGE_NAME
   
   back-end-build_and_deploy:
     docker:
@@ -67,7 +94,10 @@ jobs:
 workflows:
   testing_suite:
     jobs:
-      - front-end-testing
+      - front-end-testing:
+          filters:
+            branches:
+              only: frontend-docker
       - back-end-build_and_deploy:
           filters:
             branches:

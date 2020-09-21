@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './BookingConfirm.css'
 import './../BookingBar/BookingBar.css'
+import config from '../../config'
 
 class BookingConfirm extends Component {
 
@@ -18,7 +19,7 @@ class BookingConfirm extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/api/schedule/${this.props.data.bookingId}`)
+    fetch(`${config.base}schedule/${this.props.data.bookingId}`)
       .then(res => res.json())
       .then(res => this.setState({
         instructor: res.employee.fname + " " + res.employee.lname,
@@ -31,10 +32,10 @@ class BookingConfirm extends Component {
 
     const data = {
       customer: { id: 3 },
-      employee_schedule: { scheduleId: this.props.data.bookingId }
+      employeeSchedule: { scheduleId: this.props.data.bookingId }
     }
 
-    fetch("http://localhost:8080/api/enrollment", {
+    fetch(`${config.base}enrollment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)

@@ -13,7 +13,7 @@ const skillFixture = [
     description: "Fancy Pants",
     imageSrc: "Some file",
     length: 1,
-    skills_id: 2,
+    skillId: 2,
     skills_name: null,
     title: "yoo",
     updated_At: null

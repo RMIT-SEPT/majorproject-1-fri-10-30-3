@@ -4,6 +4,7 @@ import {Link, withRouter} from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './EditPage.css'
+import config from '../../config'
 
 class EditPage extends Component {
 
@@ -70,7 +71,7 @@ class EditPage extends Component {
     let valid = data.reduce((prev, curr) => prev && curr.validity.valid, true)
     
     if (valid) {    
-      fetch(`http://localhost:8080/api/${this.props.match.params.object}/put/${this.props.match.params.id}`, {
+      fetch(`${config.base}${this.props.match.params.object}/put/${this.props.match.params.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -104,9 +105,9 @@ class EditPage extends Component {
           result[e.id] = { id: e.value }
           break
         case 'skills':
-          result[e.id] = { skills_id: e.value }
+          result[e.id] = { skillId: e.value }
           break
-        case 'employee_schedule':
+        case 'employeeSchedule':
           result[e.id] = { scheduleId: e.value }
           break
         default: result[e.id] = e.value

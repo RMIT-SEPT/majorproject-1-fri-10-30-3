@@ -72,10 +72,10 @@ window.setTimeout(() => {
 * SCHEDULE
 * * * * * */
 window.setTimeout(() => {
-  function schedule(id, skill_id, availability, hour) {
+  function schedule(id, skillId, availability, hour) {
     return {
       employee: { id: id },
-      skills: { skills_id: skill_id },
+      skills: { skillId: skillId },
       availability: availability,
       capacity: 10,
       length: 1,
