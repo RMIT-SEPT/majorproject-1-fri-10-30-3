@@ -3,6 +3,7 @@ import './BookingBar.css'
 import Service from './../Service/Service'
 import BookingDate from './../BookingDate/BookingDate'
 import BookingConfirm from './../BookingConfirm/BookingConfirm'
+import config from '../../config'
 
 
 class BookingBar extends Component {
@@ -60,7 +61,7 @@ class BookingBar extends Component {
   }
 
   componentDidMount () {    
-    this.fetchServices("http://localhost:8080/api/skills").then(res => {
+    this.fetchServices(`${config.base}skills`).then(res => {
       this.setState({services: res})  
     })
   }
@@ -78,8 +79,8 @@ class BookingBar extends Component {
   mapService(data) {
     return data.map(service => {
       return (<Service 
-        key={service.skills_id}
-        id={service.skills_id}
+        key={service.skillId}
+        id={service.skillId}
         title={service.title} 
         description={service.description} 
         imageSrc={service.imageSrc} 
