@@ -1,4 +1,6 @@
-const base = "http://localhost:8080/api/"
+import config from "../config"
+
+const base = config.base
 
 const dataTypes = {
   TEXT: 'text',
@@ -47,12 +49,12 @@ const employee = {
 }
 
 const skills = {
-  id: "skills_id",
+  id: "skillId",
   key: 'skills',
   title: 'Skills',
   url: base + "skills",
   fields: [
-    { name: "skills_name", placeholder: "Skill Name", type: dataTypes.TEXT, editable: true },
+    { name: "skillsName", placeholder: "Skill Name", type: dataTypes.TEXT, editable: true },
     { name: "title", placeholder: "Title", type: dataTypes.TEXT, editable: true },
     { name: "imageSrc", placeholder: "Image Source", type: dataTypes.TEXT, editable: true },
     { name: "description", placeholder: "Description", type: dataTypes.TEXT, editable: true },
@@ -69,7 +71,7 @@ const booking = {
   url: base + "enrollment",
   fields: [
     { name: "customer", placeholder: "Customer ID", type: dataTypes.NUMBER, editable: true },
-    { name: "employee_schedule", placeholder: "Employee Schedule ID", type: dataTypes.NUMBER, editable: true },
+    { name: "employeeSchedule", placeholder: "Employee Schedule ID", type: dataTypes.NUMBER, editable: true },
   ]
 }
 

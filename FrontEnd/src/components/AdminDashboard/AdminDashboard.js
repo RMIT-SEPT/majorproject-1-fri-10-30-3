@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import { types, structs } from '../../constants/types'
 import './AdminDashboard.css'
+import config from '../../config'
 
 class AdminDashboard extends Component {
 
@@ -22,7 +23,7 @@ class AdminDashboard extends Component {
   }
 
   async updateTable(tab) {
-    let raw = await fetch(`http://localhost:8080/api/${tab}`).then(res => res.json())
+    let raw = await fetch(`${config.base}${tab}`).then(res => res.json())
     let valid = raw !== undefined && raw !== null && raw.length > 0
     
     if (valid) {
@@ -61,7 +62,7 @@ class AdminDashboard extends Component {
           break
         case 'customer': data = data.id
           break
-        case 'skills': data = data.skills_id
+        case 'skills': data = data.skillId
           break
         case 'employee_schedule': data = data.scheduleId
           break
