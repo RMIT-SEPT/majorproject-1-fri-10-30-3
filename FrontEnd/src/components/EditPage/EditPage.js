@@ -107,7 +107,7 @@ class EditPage extends Component {
         case 'skills':
           result[e.id] = { skillId: e.value }
           break
-        case 'employee_schedule':
+        case 'employeeSchedule':
           result[e.id] = { scheduleId: e.value }
           break
         default: result[e.id] = e.value
