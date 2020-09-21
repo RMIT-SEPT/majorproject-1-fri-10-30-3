@@ -14,7 +14,7 @@ const customers =
         records: [
             {
             employee: { id: 1 },
-            skills: { skills_id: 2 },
+            skills: { skillsId: 2 },
             availability: true,
             capacity: 10,
             length: 1,
