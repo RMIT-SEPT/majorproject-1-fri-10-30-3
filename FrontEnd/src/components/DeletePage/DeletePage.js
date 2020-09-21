@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './DeletePage.css'
+import config from '../../config'
 
 class DeletePage extends Component {
 
@@ -30,7 +31,7 @@ class DeletePage extends Component {
   }
 
   deleteRecord() {
-    fetch(`http://localhost:8080/api/${this.state.object}/delete/${this.state.id}`, {
+    fetch(`${config}${this.state.object}/delete/${this.state.id}`, {
       method: 'DELETE'
     })
   }

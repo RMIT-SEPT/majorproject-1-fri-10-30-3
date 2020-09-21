@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './BookingDate.css'
 import BookingTime from './../BookingTime/BookingTime'
+import config from '../../config'
 
 class BookingDate extends Component {
 
@@ -64,7 +65,7 @@ class BookingDate extends Component {
       bookingDate: event.currentTarget.value
     })
 
-    this.fetchTime("http://localhost:8080/api/schedule")
+    this.fetchTime(`${config.base}schedule`)
       .then(res => {
         this.setState({timeSlots: res})  
       })
@@ -81,7 +82,7 @@ class BookingDate extends Component {
 
   flatMapTime(raw) {
     return raw
-      .filter(data => data.skills.skills_id === this.props.data.id && data.availability === this.state.bookingDate)
+      .filter(data => data.skills.skillId === this.props.data.id && data.availability === this.state.bookingDate)
       .sort((a, b) => {
         if (a.startingHour > b.startingHour) {
           return 1

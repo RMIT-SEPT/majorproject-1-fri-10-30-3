@@ -88,7 +88,7 @@ class CreatePage extends Component {
           result[e.id] = { id: e.value }
           break
         case 'skills':
-          result[e.id] = { skills_id: e.value }
+          result[e.id] = { skillId: e.value }
           break
         case 'employee_schedule':
           result[e.id] = { scheduleId: e.value }

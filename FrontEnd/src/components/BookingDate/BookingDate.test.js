@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() })
 const timeFixture = [
   {
     employee: { id: 0 },
-    skills: { skills_id: 0 },
+    skills: { skillId: 0 },
     availability: "2020-09-16",
     capacity: 10,
     length: 1,
