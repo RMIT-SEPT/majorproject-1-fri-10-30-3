@@ -105,7 +105,7 @@ class CustomerDashboard extends Component {
                   <p>+61 123 123 123</p>
                 </div>
             </div>
-            <Link className="customer-dashboard-edit-btn" to={`/update/customer${this.state.id}`}><span>Edit</span></Link>
+            <Link className="customer-dashboard-edit-btn" to={`/update/customer/${this.state.id}`}><span>Edit</span></Link>
           </div>
 
           {/* TABLE */}
