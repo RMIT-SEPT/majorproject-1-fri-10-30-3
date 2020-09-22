@@ -32,32 +32,27 @@ class BookingBar extends Component {
   }
 
   stageManager() {
-    let stage;
-
     if (this.state.stage === 0) {  
-      stage = (
-        <div id="landing-service-tab" className="booking-bar-services" > {/* Services */}
+      return (<div 
+        id="landing-service-tab" 
+        className="booking-bar-services" >
           {this.state.services}
         </div>
       )
     } else if (this.state.stage === 1) {
-      stage = 
-        <BookingDate 
-          incrementStage={this.incrementStage.bind(this)} 
-          decrementStage={this.decrementStage.bind(this)} 
-          errorBox={this.errorBox.bind(this)}
-          data={this.state.selectedService}
-        />
+      return <BookingDate 
+        incrementStage={this.incrementStage.bind(this)} 
+        decrementStage={this.decrementStage.bind(this)} 
+        errorBox={this.errorBox.bind(this)}
+        data={this.state.selectedService}
+      />
     } else if (this.state.stage === 2) {      
-      stage = 
-        <BookingConfirm 
-          decrementStage={this.decrementStage.bind(this)} 
-          data={this.state.selectedService}
-          loggedIn={this.state.signedIn}
-        />
+      return <BookingConfirm 
+        decrementStage={this.decrementStage.bind(this)} 
+        data={this.state.selectedService}
+        loggedIn={this.state.signedIn}
+      />
     } 
-
-    return stage;
   }
 
   componentDidMount () {    
