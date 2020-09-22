@@ -6,19 +6,17 @@ import BookingBar from './BookingBar'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-const skillFixture = [
-  {
-    cost: 0,
-    created_At: "0",
-    description: "Fancy Pants",
-    imageSrc: "Some file",
-    length: 1,
-    skillId: 2,
-    skills_name: null,
-    title: "yoo",
-    updated_At: null
-  }
-]
+const skillFixture = [{
+  cost: 0,
+  created_At: "0",
+  description: "Fancy Pants",
+  imageSrc: "Some file",
+  length: 1,
+  skillId: 2,
+  skills_name: null,
+  title: "yoo",
+  updated_At: null
+}]
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -40,11 +38,11 @@ describe('BookingBar', () => {
                           
     process.nextTick(() => {
       const props = wrapper.state().services[0].props
+      const keys = ['title', 'description', 'cost', 'length']
 
-      expect(props.title).toEqual(skillFixture[0].title)
-      expect(props.description).toEqual(skillFixture[0].description)
-      expect(props.cost).toEqual(skillFixture[0].cost)
-      expect(props.length).toEqual(skillFixture[0].length)
+      keys.forEach(key => {
+        expect(props[key]).toEqual(skillFixture[0][key])
+      })
 
       global.fetch.mockClear()
       done()
@@ -75,8 +73,7 @@ describe('BookingBar', () => {
         </div>
       )
       
-      expect(wrapper.state().services)
-        .toEqual(error)
+      expect(wrapper.state().services).toEqual(error)
 
       global.fetch.mockClear()
       done()
