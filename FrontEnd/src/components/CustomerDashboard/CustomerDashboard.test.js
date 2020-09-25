@@ -51,16 +51,16 @@ global.fetch = jest.fn(() =>
 
 const setup = () => {
   const mockCustomerPromise = Promise.resolve(customers)
-    const mockBookgingPromise = Promise.resolve(booking)
+  const mockBookgingPromise = Promise.resolve(booking)
 
-    const mockCustomerFetch = Promise.resolve({ json: () => mockCustomerPromise })
-    const mockBookingFetch = Promise.resolve({ json: () => mockBookgingPromise })
+  const mockCustomerFetch = Promise.resolve({ json: () => mockCustomerPromise })
+  const mockBookingFetch = Promise.resolve({ json: () => mockBookgingPromise })
 
-    jest.spyOn(global, 'fetch').mockImplementation((url) => {
-      return url === `${config.base}customer/3` ? 
-        mockCustomerFetch :
-        mockBookingFetch
-    })
+  jest.spyOn(global, 'fetch').mockImplementation((url) => {
+    return url === `${config.base}customer/3` ? 
+      mockCustomerFetch :
+      mockBookingFetch
+  })
 }
 
 describe('<CustomerDashboard />', () => {

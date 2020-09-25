@@ -66,8 +66,8 @@ class ReadPage extends Component {
           .map((field, i) => {
             return (
               <tr key={i}>
-                <td>{field}</td>
-                <td>{this.sanitiseField(field, res[field])}</td>
+                <td className="read-page-field">{field}</td>
+                <td className="read-page-data">{this.sanitiseField(field, res[field])}</td>
               </tr>)
           }) 
 
@@ -112,8 +112,8 @@ class ReadPage extends Component {
     this.setState({
       elements: [(
         <tr key="0">
-          <td>Error</td>
-          <td>Object Type '{this.props.match.params.object}' Does Not Exist</td>
+          <td className="read-page-field">Error</td>
+          <td className="read-page-data">Object Type '{this.props.match.params.object}' Does Not Exist</td>
         </tr>
       )]
     })
@@ -123,8 +123,8 @@ class ReadPage extends Component {
     this.setState({
       elements: [(
         <tr key="0">
-          <td>Error</td>
-          <td>Hmm.. Looks like something went wrong there, please try again later</td>
+          <td className="read-page-field">Error</td>
+          <td className="read-page-data">Hmm.. Looks like something went wrong there, please try again later</td>
         </tr>
       )]
     })
