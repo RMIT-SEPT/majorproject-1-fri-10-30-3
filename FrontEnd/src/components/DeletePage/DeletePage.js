@@ -31,7 +31,7 @@ class DeletePage extends Component {
   }
 
   deleteRecord() {
-    fetch(`${config}${this.state.object}/delete/${this.state.id}`, {
+    fetch(`${config.base}${this.state.object}/delete/${this.state.id}`, {
       method: 'DELETE'
     })
   }
