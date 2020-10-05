@@ -97,7 +97,7 @@ class EmployeeDashboard extends Component {
                 </div>
                 <div className="customer-dashboard-data">
                   <p>{this.state.password}</p>
-                  <p>123 Street, Melb, Vic</p>
+                  <p>123 Street, Melb, Victoria</p>
                   <p>+61 123 123 123</p>
                 </div>
             </div>
