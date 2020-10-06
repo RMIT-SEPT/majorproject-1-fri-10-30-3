@@ -7,4 +7,7 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
 
     @Override
     Iterable<Customer> findAllById(Iterable<Long> iterable);
+    //New methods after milestone2
+    Customer findByUserName(String username);
+    Customer getById(Long id);
 }

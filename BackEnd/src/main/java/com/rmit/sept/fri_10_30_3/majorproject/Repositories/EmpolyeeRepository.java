@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface EmpolyeeRepository extends CrudRepository<Employee,Long> {
     @Override
     Iterable<Employee> findAllById(Iterable<Long> iterable);
-
     Optional<Employee> deleteById(long id);
+    //New methods after milestone2
+    Employee findByUserName(String username);
+    Employee getById(Long id);
 }

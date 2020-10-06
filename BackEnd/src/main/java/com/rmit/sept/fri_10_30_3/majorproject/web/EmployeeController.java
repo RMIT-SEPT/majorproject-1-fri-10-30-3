@@ -1,13 +1,16 @@
 package com.rmit.sept.fri_10_30_3.majorproject.web;
 
+import com.rmit.sept.fri_10_30_3.majorproject.Validator.EmployeeValidator;
+import com.rmit.sept.fri_10_30_3.majorproject.Validator.MapValidationErrorService;
 import com.rmit.sept.fri_10_30_3.majorproject.model.Employee;
 import com.rmit.sept.fri_10_30_3.majorproject.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -16,11 +19,21 @@ import java.util.Optional;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private EmployeeValidator employeeValidator;
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
 
-    @PostMapping("")
-    public ResponseEntity<Employee> createNewWorker(@RequestBody Employee employee){
-        Employee newEmployee = employeeService.saveOrUpdateEmployee(employee);
-        return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
+    @PostMapping("/register")
+    public ResponseEntity<?> registerEmployee (@Valid @RequestBody Employee employee, BindingResult result){
+        employeeValidator.validate(employee,result);
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null)return errorMap;
+
+        Employee newEmployee =employeeService.saveEmployee(employee);
+
+        return new ResponseEntity<Employee>(newEmployee, HttpStatus.CREATED);
     }
 
     @GetMapping("")

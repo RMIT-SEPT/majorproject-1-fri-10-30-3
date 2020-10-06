@@ -6,4 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface AdminRepository extends CrudRepository<Admin,Long> {
     @Override
     Iterable<Admin> findAllById(Iterable<Long> iterable);
+    //New methods after milestone2
+    Admin findByUserName(String username);
+    Admin getById(Long id);
 }

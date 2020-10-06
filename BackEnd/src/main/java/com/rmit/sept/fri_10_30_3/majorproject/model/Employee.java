@@ -1,15 +1,20 @@
 package com.rmit.sept.fri_10_30_3.majorproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @DiscriminatorValue("employee")
-public class Employee extends Person{
-
+public class Employee extends Person implements UserDetails {
+    @NotBlank(message = "First name is required.")
     private String fname;
+    @NotBlank(message = "Last name is required.")
     private String lname;
 
     public Employee() {
@@ -35,7 +40,6 @@ public class Employee extends Person{
         this.fname = fname;
     }
 
-
     public String getLname() {
         return lname;
     }
@@ -44,4 +48,33 @@ public class Employee extends Person{
         this.lname = lname;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return super.getUserName();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
