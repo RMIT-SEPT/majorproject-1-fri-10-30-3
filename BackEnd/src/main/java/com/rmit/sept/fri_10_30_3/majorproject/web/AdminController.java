@@ -48,4 +48,18 @@ public class AdminController {
     public Optional<Admin> getByID(@PathVariable long id){
         return adminService.findByID(id);
     }
+
+    @PutMapping("put/{id}")
+    public ResponseEntity<Admin> updateExistedWorker(@RequestBody Admin admin, @PathVariable long id){
+        Optional<Admin> e = adminService.findByID(id);
+        //Check if the employee exists or not
+        if(e.isPresent()){
+            e.get().setId(id);
+            e.get().setCompanyName(admin.getCompanyName());
+            adminService.saveOrUpdateAdmin(e.get());
+            return new ResponseEntity<Admin>(e.get(), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<Admin>(admin, HttpStatus.NO_CONTENT);
+        }
+    }
 }
