@@ -3,6 +3,7 @@ package com.rmit.sept.fri_10_30_3.majorproject.web;
 import com.rmit.sept.fri_10_30_3.majorproject.Validator.CustomerValidator;
 import com.rmit.sept.fri_10_30_3.majorproject.Validator.MapValidationErrorService;
 import com.rmit.sept.fri_10_30_3.majorproject.model.Customer;
+import com.rmit.sept.fri_10_30_3.majorproject.model.Employee;
 import com.rmit.sept.fri_10_30_3.majorproject.payload.JWTLoginSucessReponse;
 import com.rmit.sept.fri_10_30_3.majorproject.payload.LoginRequest;
 import com.rmit.sept.fri_10_30_3.majorproject.security.JwtTokenProvider;
@@ -87,5 +88,22 @@ public class CustomerController {
     @GetMapping("{id}")
     public Optional<Customer> getByID(@PathVariable long id){
         return customerService.findByID(id);
+    }
+
+    @PutMapping("put/{id}")
+    public ResponseEntity<Customer> updateExistedWorker(@RequestBody Customer customer, @PathVariable long id){
+        Optional<Customer> e = customerService.findByID(id);
+        //Check if the employee exists or not
+        if(e.isPresent()){
+            e.get().setId(id);
+            e.get().setFname(customer.getFname());
+            e.get().setLname(customer.getLname());
+            e.get().setPhone(customer.getPhone());
+            e.get().setAddress(customer.getAddress());
+            customerService.saveOrUpdateCustomer(e.get());
+            return new ResponseEntity<Customer>(e.get(), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<Customer>(customer, HttpStatus.NO_CONTENT);
+        }
     }
 }
