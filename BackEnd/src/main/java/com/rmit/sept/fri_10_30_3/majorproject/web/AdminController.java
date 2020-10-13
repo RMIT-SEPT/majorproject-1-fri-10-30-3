@@ -35,8 +35,8 @@ public class AdminController {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null)return errorMap;
 
-        Admin newAdmin = adminService.saveOrUpdateAdmin(admin);
-        return new ResponseEntity<Admin>(admin, HttpStatus.CREATED);
+        Admin newAdmin = adminService.saveAdmin(admin);
+        return new ResponseEntity<Admin>(newAdmin, HttpStatus.CREATED);
     }
 
     @GetMapping("")
