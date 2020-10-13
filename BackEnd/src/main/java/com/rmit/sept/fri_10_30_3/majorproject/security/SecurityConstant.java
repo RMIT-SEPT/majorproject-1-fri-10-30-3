@@ -8,6 +8,6 @@ public class SecurityConstant {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
     public static final String CUSTOMER_LOGIN = "/api/customer/login";
-    public static final String SKILLS = "/api/skills/";
+    public static final String SKILLS = "/api/skills";
     public static final long EXPIRATION_TIME = 240_000;
 }
