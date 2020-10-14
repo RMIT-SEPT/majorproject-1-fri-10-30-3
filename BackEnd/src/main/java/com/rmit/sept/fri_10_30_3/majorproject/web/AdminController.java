@@ -56,6 +56,8 @@ public class AdminController {
         if(e.isPresent()){
             e.get().setId(id);
             e.get().setCompanyName(admin.getCompanyName());
+            e.get().getFname();
+            e.get().getLname();
             adminService.saveOrUpdateAdmin(e.get());
             return new ResponseEntity<Admin>(e.get(), HttpStatus.CREATED);
         }else{
