@@ -30,7 +30,7 @@ const App = () => (
       {/* DASHBOARDS */}
       <Route path="/dashboard/customer" component={CustomerDashboard} />
       <Route path="/dashboard/admin" component={AdminDashboard} />
-      <Route path="/dashboard/employee" component={EmployeeDashboard} />
+      <Route path="/dashboard/employee/:id" component={EmployeeDashboard} />
 
       {/* CRUD Operations */}
       <Route path="/create/:object" component={CreatePage} />
