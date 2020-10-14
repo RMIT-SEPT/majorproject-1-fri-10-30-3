@@ -75,7 +75,7 @@ class EmployeeDashboard extends Component {
         <div className="customer-dashboard-container">
           
           {/* USER INFO */}
-          <div className="employee-dashboard-personal-info">
+          <div className="customer-dashboard-personal-info">
             <h1>Hello, {this.state.fname}</h1>
             <div>
               <div className="customer-dashboard-data">
