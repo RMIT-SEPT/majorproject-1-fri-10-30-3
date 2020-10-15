@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
-import { types, structs } from '../../constants/types'
+import { types, structs, session } from '../../constants/types'
 import './AdminDashboard.css'
 import config from '../../config'
 
@@ -23,7 +23,15 @@ class AdminDashboard extends Component {
   }
 
   async updateTable(tab) {
-    let raw = await fetch(`${config.base}${tab}`).then(res => res.json())
+    let raw = await fetch(`${config.base}${tab}`, {
+      headers: {
+        Authorization: sessionStorage.getItem(session.TOKEN)
+      }
+    })
+    .then(res => this.validateStatus(res))
+    .then(res => res.json())
+    .catch(this.errorHandler.bind(this))
+    
     let valid = raw !== undefined && raw !== null && raw.length > 0
     
     if (valid) {
@@ -39,7 +47,7 @@ class AdminDashboard extends Component {
             this.parseFields(keys, e)}
           </tr>
         )
-    })
+      })
 
       this.setState({
         currentTab: tab,
@@ -77,6 +85,25 @@ class AdminDashboard extends Component {
     return type === this.state.currentTab ? "admin-dashboard-active" : ""
   }
 
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
+  }
+
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else console.dir(error)
+  }
+
   render() {
     return (
       <div>
@@ -84,7 +111,7 @@ class AdminDashboard extends Component {
         <div className="admin-dashboard-container">
           <div className="admin-dashboard-contents">
             <div className="admin-dashboard-title">
-              <h1>Welcome Admin Foo</h1>
+              <h1>Welcome Admin {sessionStorage.getItem(session.NAME)}</h1>
             </div>
             <div className="admin-dashboard-action-container">
               <Link to="/create/customer"><span>Create Customer</span></Link>

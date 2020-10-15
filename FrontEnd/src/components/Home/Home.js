@@ -6,6 +6,14 @@ import "./Home.css"
 
 class Home extends Component {
 
+  funButton() {
+    document.querySelector("html").className += "spinnyboi"
+    
+    window.setTimeout(() => {
+      document.querySelector("html").classList.remove("spinnyboi")
+    }, 3000)
+  }
+
   render() {
     return (
       <div>
@@ -20,8 +28,8 @@ class Home extends Component {
             
             {/* Actions */}
             <div className="landing-box-buttons">
-              <button className="landing-box-action button-solid ff-bg-yellow">Services</button>
-              <button className="landing-box-action button-alt ff-yellow">Learn More</button>
+              <button onClick={() => {window.location = "/#services"}} className="landing-box-action button-solid ff-bg-yellow">Services</button>
+              <button onClick={() => {window.location = "/#aboutus"}} className="landing-box-action button-alt ff-yellow">Learn More</button>
             </div>
             
             {/* Socials */}
@@ -29,7 +37,7 @@ class Home extends Component {
               <button className="landing-socials"><i className="landing-social-action fab fa-facebook"></i></button>
               <button className="landing-socials"><i className="landing-social-action fab fa-twitter"></i></button>
               <button className="landing-socials"><i className="landing-social-action fab fa-instagram"></i></button>
-              <button className="landing-socials"><i className="landing-social-action fab fa-google"></i></button>
+              <button onClick={this.funButton} className="landing-socials"><i className="landing-social-action fab fa-google"></i></button>
             </div>
 
           </div>

@@ -76,6 +76,9 @@
 }
 
 .header-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: none;
 }
@@ -86,6 +89,7 @@
 
 .header-login-icon {
   color: #fedd5bb4;
+  font-size: 16px;
 }
 
 .header-login-icon:hover {
@@ -104,4 +108,9 @@ a:link {
   width: 25px;
   height: 25px;
   border-radius: 50%;
+}
+
+.home-icons {
+  display: flex;
+  gap: 20px;
 }

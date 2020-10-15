@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./EmployeeDashboard.css"
 import { Link } from "react-router-dom";
+import { types, session } from '../../constants/types'
 
 
 class EmployeeDashboard extends Component {
@@ -15,6 +16,8 @@ class EmployeeDashboard extends Component {
       lname: '',
       userName: '',
       password: '',
+      phone: '',
+      address: '',
       id: props.match.params.id,
       schedule: [],
       skills: []
@@ -23,25 +26,31 @@ class EmployeeDashboard extends Component {
 
   componentDidMount() {
     this.updateEmployeeDetails()
-    this.updateScheduleRecords()
     this.updateSkills()
+    this.updateScheduleRecords()
   }
 
   updateEmployeeDetails() {
-    fetch(`http://localhost:8080/api/employee/${this.state.id}`)
+    fetch(`http://localhost:8080/api/employee/${this.state.id}`, {
+      headers: {
+        Authorization: sessionStorage.getItem(session.TOKEN)
+      }
+    })
+      .then(res => this.validateStatus(res))
       .then(res => res.json())
       .then(res => {
         this.setState(res)
       })
+      .catch(this.errorHandler.bind(this))
   }
 
   updateScheduleRecords() {
     fetch(`http://localhost:8080/api/schedule`)
       .then(res => res.json())
       .then(res => {
-        const filtered = res.filter(b => b.employee.id === this.state.id)
+        const filtered = res.filter(b => b.employee.id === Number.parseInt(this.state.id))
         const parsed = this.parseSchedule(filtered)
-        
+      
         this.setState({
           schedule: parsed
         })
@@ -53,13 +62,10 @@ class EmployeeDashboard extends Component {
       .then(res => res.json())
       .then(async res => {
         const skillId = await fetch(`http://localhost:8080/api/schedule`)
-          .then(res => res.json())
-          .then(res => Array.isArray(res) ? res : [res])
-          .then(res => res.map(s => s.skills.skillId))
-          .then(res =>  res.filter((value, index, self) => {
-            return self.indexOf(value) === index;
-          }))
-          console.log(skillId)
+          .then(res1 => res1.json())
+          .then(res1 => Array.isArray(res1) ? res1 : [res1])
+          .then(res1 => res1.map(s => s.skills.skillId))
+          .then(res1 =>  res1.filter((value, index, self) => self.indexOf(value) === index))
         const filtered = res.filter(b => skillId.find(s => s === b.skillId))
         const parsed = this.parseSkill(filtered)
         
@@ -67,13 +73,14 @@ class EmployeeDashboard extends Component {
           skills: parsed
         })
       })
+      .catch(this.errorHandler.bind(this))
   }
 
   parseSchedule(data) {
     return data.map((b, i) => {
       return (
         <tr 
-          className="customer-dashboard-record" 
+          className="employee-dashboard-record" 
           onClick={() => { this.props.history.push(`/read/schedule/${b.scheduleId}`) }} 
           key={i}
         >
@@ -96,7 +103,7 @@ class EmployeeDashboard extends Component {
     return data.map((b, i) => {
       return (
         <tr 
-          className="customer-dashboard-record" 
+          className="employee-dashboard-record" 
           onClick={() => { this.props.history.push(`/read/skills/${b.skillId}`) }} 
           key={i}
         >
@@ -114,51 +121,67 @@ class EmployeeDashboard extends Component {
     })
   }
 
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else console.dir(error)
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
+  }
+
   render() {
     return (
-      <div className="customer-dashboard-box">
+      <div className="employee-dashboard-box">
       {/* HEADER */}
       <Header></Header>
-
-      <body>
-
-        <div className="customer-dashboard-inner">
-          <div className="customer-dashboard-container">
+      <div className="employee-dashboard-inner">
+          <div className="employee-dashboard-container">
             
             {/* USER INFO */}
-            <div className="customer-dashboard-personal-info">
+            <div className="employee-dashboard-personal-info">
               <h1>Hello, {this.state.fname}</h1>
               <div>
-                <div className="customer-dashboard-data">
-                  <p className="customer-dashboard-title">First Name</p>
-                  <p className="customer-dashboard-title">Last Name</p>
-                  <p className="customer-dashboard-title">UserName</p>
+                <div className="employee-dashboard-data">
+                  <p className="employee-dashboard-title">First Name</p>
+                  <p className="employee-dashboard-title">Last Name</p>
+                  <p className="employee-dashboard-title">UserName</p>
                 </div>
-                <div className="customer-dashboard-data customer-dashboard-spacer">
+                <div className="employee-dashboard-data employee-dashboard-spacer">
                   <p>{this.state.fname}</p>
                   <p>{this.state.lname}</p>
                 <p>{this.state.userName}</p>
                 </div>
               </div>
               <div>
-                <div className="customer-dashboard-data">
-                    <p className="customer-dashboard-title">Password</p>
-                    <p className="customer-dashboard-title">Address</p>
-                    <p className="customer-dashboard-title">Phone Number</p>
+                <div className="employee-dashboard-data">
+                    <p className="employee-dashboard-title">ID</p>
+                    <p className="employee-dashboard-title">Address</p>
+                    <p className="employee-dashboard-title">Phone Number</p>
                   </div>
-                  <div className="customer-dashboard-data">
-                    <p>{this.state.password}</p>
-                    <p>123 Street, Melb, Victoria</p>
-                    <p>+61 123 123 123</p>
+                  <div className="employee-dashboard-data">
+                    <p>{this.state.id}</p>
+                    <p>{this.state.address}</p>
+                    <p>{this.state.phone}</p>
                   </div>
               </div>
-              <Link className="customer-dashboard-edit-btn" to={`/update/employee/${this.state.id}`}><span>Edit</span></Link>
+              <Link className="employee-dashboard-edit-btn" to={`/update/employee/${this.state.id}`}><span>Edit</span></Link>
             </div>
 
             {/* TABLE */}
-            <div className="customer-dashboard-table-container">
-              <h3>{this.state.fname}'s Schedule</h3>
-              <table className="customer-dashboard-table">
+            <div className="employee-dashboard-table-container">
+              <h3 className="ff-white">Schedule</h3>
+              <table className="employee-dashboard-table">
                 <tbody>
                   <tr>
                     <th>Schedule ID</th>
@@ -178,32 +201,28 @@ class EmployeeDashboard extends Component {
             </div>
 
             
-            {/* TABLE - skills */}
-            <div className="customer-dashboard-table-container">
-            <h3>{this.state.fname}'s Skills</h3>
-              <table className="customer-dashboard-table">
-                <tbody>
-                  <tr>
-                    <th>Skill ID</th>
-                    <th>Skill Name</th>
-                    <th>Title</th>
-                    <th>Image Src</th>
-                    <th>Description</th>
-                    <th>Length</th>
-                    <th>Cost</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                  </tr>
-                  {this.state.skills}
-                </tbody>
-              </table>
-            </div>
-            
+          {/* TABLE - skills */}
+          <div className="employee-dashboard-table-container">
+          <h3 className="ff-white">Skills</h3>
+            <table className="employee-dashboard-table">
+              <tbody>
+                <tr>
+                  <th>Skill ID</th>
+                  <th>Skill Name</th>
+                  <th>Title</th>
+                  <th>Image Src</th>
+                  <th>Description</th>
+                  <th>Length</th>
+                  <th>Cost</th>
+                  <th>Created At</th>
+                  <th>Updated At</th>
+                </tr>
+                {this.state.skills}
+              </tbody>
+            </table>
           </div>
         </div>
-      </body>
-
-
+      </div>
       {/* FOOTER */}
       <Footer></Footer>
       </div>

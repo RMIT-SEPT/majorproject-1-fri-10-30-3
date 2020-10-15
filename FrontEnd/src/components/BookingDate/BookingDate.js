@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './BookingDate.css'
 import BookingTime from './../BookingTime/BookingTime'
 import config from '../../config'
+import { session, types } from "../../constants/types";
 
 class BookingDate extends Component {
 
@@ -72,12 +73,36 @@ class BookingDate extends Component {
   }
 
   async fetchTime(url) {
-    const raw = await fetch(url)
+    const raw = await fetch(url, {
+      headers: {
+        Authorization: sessionStorage.getItem(session.TOKEN)
+      }
+    })
+      .then(res => this.validateStatus(res))
       .then(res => res.json())
-      .catch(err => { return {error: true, message: err.message} })
+      .catch(err => this.errorHandler.bind(this))
     const error = raw['error'] !== undefined && raw['error']
 
     return error ? this.props.errorBox() : this.flatMapTime(raw);
+  }
+
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else return {error: true, message: error.message}
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
   }
 
   flatMapTime(raw) {
