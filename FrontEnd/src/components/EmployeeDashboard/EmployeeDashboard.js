@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import "./EmployeeDashboard.css"
 import { Link } from "react-router-dom";
 import { types, session } from '../../constants/types'
+import config from '../../config';
 
 
 class EmployeeDashboard extends Component {
@@ -31,7 +32,7 @@ class EmployeeDashboard extends Component {
   }
 
   updateEmployeeDetails() {
-    fetch(`http://localhost:8080/api/employee/${this.state.id}`, {
+    fetch(config.base + `employee/${this.state.id}`, {
       headers: {
         Authorization: sessionStorage.getItem(session.TOKEN)
       }
@@ -45,12 +46,12 @@ class EmployeeDashboard extends Component {
   }
 
   updateScheduleRecords() {
-    fetch(`http://localhost:8080/api/schedule`)
+    fetch(config.base + `schedule`)
       .then(res => res.json())
       .then(res => {
         const filtered = res.filter(b => b.employee.id === Number.parseInt(this.state.id))
         const parsed = this.parseSchedule(filtered)
-      
+        
         this.setState({
           schedule: parsed
         })
@@ -58,10 +59,10 @@ class EmployeeDashboard extends Component {
   }
 
   updateSkills(){
-    fetch(`http://localhost:8080/api/skills`)
+    fetch(config.base + `skills`)
       .then(res => res.json())
       .then(async res => {
-        const skillId = await fetch(`http://localhost:8080/api/schedule`)
+        const skillId = await fetch(config.base + `schedule`)
           .then(res1 => res1.json())
           .then(res1 => Array.isArray(res1) ? res1 : [res1])
           .then(res1 => res1.map(s => s.skills.skillId))
@@ -86,14 +87,14 @@ class EmployeeDashboard extends Component {
         >
           <td>{b.scheduleId}</td>
           <td>{b.employee.id}</td>
-          <td>{b.skills.skillid}</td>
+          <td>{b.skills.skillId}</td>
           <td>{b.capacity}</td>
           <td>{b.price}</td>
           <td>{b.availability}</td>
           <td>{b.startingHour}</td>
           <td>{b.length}</td>
-          <td>{b.createdAt}</td>
-          <td>{b.updatedAt}</td>
+          <td>{b.created_At}</td>
+          <td>{b.updated_At}</td>
         </tr>
       )
     })
@@ -114,8 +115,8 @@ class EmployeeDashboard extends Component {
           <td>{b.description}</td>
           <td>{b.length}</td>
           <td>{b.cost}</td>
-          <td>{b.createdAt}</td>
-          <td>{b.updatedAt}</td>
+          <td>{b.created_At}</td>
+          <td>{b.updated_At}</td>
         </tr>
       )
     })

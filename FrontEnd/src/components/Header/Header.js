@@ -78,7 +78,6 @@ class Header extends Component {
       this.props.history.push(this.urlBuilder(res.type))
     })
     .catch(err => {
-      console.log(err)
       this.props.history.push("/")
     })
   }
