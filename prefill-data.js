@@ -16,7 +16,6 @@ async function login () {
 
 function execute(token) {
   console.log("REQUEST COMPLETE: ", "http://localhost:8080/api/customer/register")
-  console.log(token)
 
   function post(url, payload) {
     payload.forEach(data => {
@@ -80,6 +79,19 @@ function execute(token) {
       confirmPassword: "abc123"
     }
   ])
+
+  /* * * * * *
+  * ADMIN
+  * * * * * */
+ post("http://localhost:8080/api/admin/register", [
+  {
+    userName: "admin",
+    fname: "arone",
+    lname: "susau",
+    password: "abc123",
+    confirmPassword: "abc123"
+  },
+])
   
   /* * * * * *
   * SCHEDULE
@@ -102,15 +114,15 @@ function execute(token) {
     const month = date.getMonth() + 1;
     
     post("http://localhost:8080/api/schedule", [
-      schedule(2, 1, `2020-${month}-${day}`, 10),
-      schedule(2, 1, `2020-${month}-${day}`, 12),
-      schedule(2, 1, `2020-${month}-${day}`, 14),
-      schedule(2, 1, `2020-${month}-${day}`, 16),
-      schedule(2, 1, `2020-${month}-${day}`, 18),
-      schedule(2, 2, `2020-${month}-${day}`, 9),
-      schedule(2, 2, `2020-${month}-${day}`, 13),
-      schedule(2, 2, `2020-${month}-${day}`, 15),
-      schedule(2, 2, `2020-${month}-${day}`, 17),
+      schedule(4, 1, `2020-${month}-${day}`, 10),
+      schedule(4, 1, `2020-${month}-${day}`, 12),
+      schedule(4, 1, `2020-${month}-${day}`, 14),
+      schedule(4, 1, `2020-${month}-${day}`, 16),
+      schedule(4, 1, `2020-${month}-${day}`, 18),
+      schedule(4, 2, `2020-${month}-${day}`, 9),
+      schedule(4, 2, `2020-${month}-${day}`, 13),
+      schedule(4, 2, `2020-${month}-${day}`, 15),
+      schedule(4, 2, `2020-${month}-${day}`, 17),
   
       schedule(3, 1, `2020-${month}-${day}`, 10),
       schedule(3, 1, `2020-${month}-${day}`, 14),
