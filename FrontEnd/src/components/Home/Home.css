@@ -193,3 +193,16 @@
   margin-top: 6%;
   margin-left: 10%;
 }
+
+.spinnyboi {
+  animation: spin 3s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1440deg);
+  }
+}

@@ -16,9 +16,12 @@ const customer = {
   url: base + "customer",
   fields: [
     { name: "userName", placeholder: "Username", type: dataTypes.TEXT, editable: false },
-    { name: "password", placeholder: "Password", type: dataTypes.PASSWORD, editable: true },
+    { name: "password", placeholder: "Password", type: dataTypes.PASSWORD, editable: false },
+    { name: "confirmPassword", placeholder: "Confirm Password", type: dataTypes.PASSWORD, editable: false },
     { name: "fname", placeholder: "First Name", type: dataTypes.TEXT, editable: true },
-    { name: "lname", placeholder: "Last Name", type: dataTypes.TEXT, editable: true }
+    { name: "lname", placeholder: "Last Name", type: dataTypes.TEXT, editable: true },
+    { name: "address", placeholder: "Address", type: dataTypes.TEXT, editable: true },
+    { name: "phone", placeholder: "Phone", type: dataTypes.TEXT, editable: true },
   ]
 }
 
@@ -30,8 +33,9 @@ const admin = {
   fields: [
     { name: "userName", placeholder: "Username", type: dataTypes.TEXT, editable: false },
     { name: "password", placeholder: "Password", type: dataTypes.PASSWORD, editable: true },
+    { name: "confirmPassword", placeholder: "Confirm Password", type: dataTypes.PASSWORD, editable: false },
     { name: "fname", placeholder: "First Name", type: dataTypes.TEXT, editable: true },
-    { name: "lname", placeholder: "Last Name", type: dataTypes.TEXT, editable: true }
+    { name: "lname", placeholder: "Last Name", type: dataTypes.NUMBER, editable: true }
   ]
 }
 
@@ -42,9 +46,12 @@ const employee = {
   url: base + "employee",
   fields: [
     { name: "userName", placeholder: "Username", type: dataTypes.TEXT, editable: false },
-    { name: "password", placeholder: "Password", type: dataTypes.PASSWORD, editable: true },
+    { name: "password", placeholder: "Password", type: dataTypes.PASSWORD, editable: false },
+    { name: "confirmPassword", placeholder: "Confirm Password", type: dataTypes.PASSWORD, editable: false },
     { name: "fname", placeholder: "First Name", type: dataTypes.TEXT, editable: true },
-    { name: "lname", placeholder: "Last Name", type: dataTypes.TEXT, editable: true }
+    { name: "lname", placeholder: "Last Name", type: dataTypes.TEXT, editable: true },
+    { name: "address", placeholder: "Address", type: dataTypes.TEXT, editable: true },
+    { name: "phone", placeholder: "Phone", type: dataTypes.NUMBER, editable: true },
   ]
 }
 
@@ -98,7 +105,13 @@ const types = {
   SKILLS: skills.key,
   BOOKING: booking.key,
   SCHEDULE: schedule.key,
-  ENROLLMENT: booking.alt
+  ENROLLMENT: booking.alt,
+  credentials: {
+    CUSTOMER: "Customer",
+    ADMIN: "Admin",
+    EMPLOYEE: "Employee",
+    DEFAULT: "Default"
+  }
 }
 
 const structs = {
@@ -111,4 +124,12 @@ const structs = {
   schedule: schedule
 }
 
-export { types, structs }
+const session = {
+  LOGIN: "login",
+  TOKEN: "token",
+  TYPE: "type",
+  NAME: "name",
+  ID: "id"
+}
+
+export { types, structs, session }

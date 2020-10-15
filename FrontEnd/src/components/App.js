@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,26 +20,30 @@ import DeletePage from './DeletePage/DeletePage'
 
 import './App.css'
 
-const App = () => (
-  <Router>
-    <Switch>
-      
-      {/* ROOT */}
-      <Route exact path="/" component={Home} />
+export default class App extends Component {
 
-      {/* DASHBOARDS */}
-      <Route path="/dashboard/customer" component={CustomerDashboard} />
-      <Route path="/dashboard/admin" component={AdminDashboard} />
-      <Route path="/dashboard/employee/:id" component={EmployeeDashboard} />
+  render() {
+    return (
+      <Router>
+        <Switch>
+          
+          {/* ROOT */}
+          <Route exact path="/" component={Home} />
 
-      {/* CRUD Operations */}
-      <Route path="/create/:object" component={CreatePage} />
-      <Route path="/read/:object/:id" component={ReadPage} />
-      <Route path="/update/:object/:id" component={EditPage} />
-      <Route path="/delete/:object/:id" component={DeletePage} />
+          {/* DASHBOARDS */}
+          <Route path="/dashboard/customer" component={CustomerDashboard} />
+          <Route path="/dashboard/admin" component={AdminDashboard} />
+          <Route path="/dashboard/employee/:id" component={EmployeeDashboard} />
 
-    </Switch>
-  </Router>
-)
+          {/* CRUD Operations */}
+          <Route path="/create/:object" component={CreatePage} />
+          <Route path="/read/:object/:id" component={ReadPage} />
+          <Route path="/update/:object/:id" component={EditPage} />
+          <Route path="/delete/:object/:id" component={DeletePage} />
 
-export default App
+        </Switch>
+      </Router>
+    )
+  }
+
+}

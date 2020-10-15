@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { types, structs } from '../../constants/types'
+import { types, structs, session } from '../../constants/types'
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -55,7 +55,12 @@ class ReadPage extends Component {
   }
 
   parseFields(obj, id) {
-    fetch(obj.url + `/${id}`)
+    fetch(obj.url + `/${id}`, {
+      headers: {
+        Authorization: sessionStorage.getItem(session.TOKEN),
+      }
+    })
+      .then(res => this.validateStatus(res))
       .then(res => res.json())
       .then(res => {
         if (res == null) {
@@ -76,7 +81,26 @@ class ReadPage extends Component {
           })
         }
       })
-      .catch(this.error.bind(this))
+      .catch(this.errorHandler.bind(this))
+  }
+
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else return this.error()
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
   }
 
   sanitiseField(field, data) {
@@ -138,8 +162,7 @@ class ReadPage extends Component {
           <div className="read-page-contents">
             <div className="read-page-title-content">
               <h1>{this.state.title} - ID: {this.state.id}</h1>
-                {/* TODO: Update link to dashboard of currently logged in user type, e.g. Admin or employee */}
-                <Link to='/dashboard/admin'><i className="far fa-times-circle"></i></Link>
+                <Link to={`/dashboard/${sessionStorage.getItem(session.TYPE)}/${sessionStorage.getItem(session.ID)}`}><i className="far fa-times-circle"></i></Link>
             </div>
             <table>
               <tbody>

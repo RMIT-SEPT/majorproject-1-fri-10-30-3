@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { structs } from '../../constants/types'
+import { types, session, structs } from '../../constants/types'
 import {Link, withRouter} from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -54,28 +54,40 @@ class CreatePage extends Component {
     let valid = data.reduce((prev, curr) => prev && curr.validity.valid, true)
     
     if (valid) {    
-      fetch(structs[this.state.object].url, {
+      fetch(this.generateURL(), {
         method: "POST",
         headers: {
+          Authorization: sessionStorage.getItem(session.TOKEN),
           "Content-Type": "application/json"
         },
         body: JSON.stringify(this.parseFields(data))
       })
+      .then(res => this.validateStatus(res))
       .then(res => {
         if (res.ok) {
-          // TODO: Update this to actual user type currently logged in
-          this.props.history.push("/dashboard/admin")
+          this.props.history.push(this.printHomePath())
         } else {
-
-          // TODO: Preferably create pretty modal
           window.alert("Looks like something went wrong, please try again later.")
         }
       })
+      .catch(this.errorHandler.bind(this))
     } else {
-
-      // TODO: Preferably create pretty modal
       window.alert("Please fill in all reamining fields.")
     }
+  }
+
+  generateURL() {
+    switch (this.state.object) {
+      case structs.admin.key: 
+      case structs.employee.key:
+      case structs.customer.key:
+        return structs[this.state.object].url + "/register"
+      default: return structs[this.state.object].url
+    }
+  }
+
+  printHomePath() {
+    return `/dashboard/${sessionStorage.getItem(session.TYPE)}/${sessionStorage.getItem(session.ID)}`
   }
 
   parseFields(data) {
@@ -100,6 +112,25 @@ class CreatePage extends Component {
     return result
   }
 
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else console.dir(error)
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
+  }
+
   render() {
     return (
       <div>
@@ -108,8 +139,7 @@ class CreatePage extends Component {
           <div className="create-page-contents">
             <div className="create-page-title-content">
               <h1>Create {this.state.title}</h1>
-                {/* TODO: Update link to dashboard of currently logged in user type, e.g. Admin or employee */}
-                <Link to='/dashboard/admin'><i className="far fa-times-circle"></i></Link>
+                <Link to={this.printHomePath()}><i className="far fa-times-circle"></i></Link>
             </div>
 
             <div className="create-page-fields">
@@ -117,8 +147,7 @@ class CreatePage extends Component {
             </div>
 
             <div className="create-page-actions">
-            {/* TODO: Update link to dashboard of currently logged in user type, e.g. Admin or employee */}
-              <Link to='/dashboard/admin' className="create-page-delete">Cancel</Link>
+              <Link to={this.printHomePath()} className="create-page-delete">Cancel</Link>
               <button onClick={this.submit.bind(this)} className="create-page-edit">Create</button>
             </div>
           </div>

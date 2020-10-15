@@ -5,6 +5,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './EditPage.css'
 import config from '../../config'
+import { session, types } from "../../constants/types";
 
 class EditPage extends Component {
 
@@ -31,20 +32,49 @@ class EditPage extends Component {
     })
 
     if (structs[this.props.match.params.object] !== undefined) {
-      fetch(structs[this.props.match.params.object].url + `/${this.props.match.params.id}`)
-        .then(res => res.json())
-        .then(res => {
-          if (res) {
-            this.renderElements(structs[this.props.match.params.object].fields, res)
-          } else {
-            this.setState({
-              elements: [
-                (<p>Invalid ID Provided.</p>)
-              ]
-            })
-          }
-        })
+      this.buildElement()
     }
+  }
+
+  buildElement() {
+    fetch(structs[this.props.match.params.object].url + "/" + sessionStorage.getItem(session.ID), {
+      headers: {
+        Authorization: sessionStorage.getItem(session.TOKEN),
+      }
+    })
+    .then(this.validateStatus.bind(this))
+    .then(res => res.json())
+    .then(res => {
+      if (res) {
+        this.renderElements(structs[this.props.match.params.object].fields, res)
+      } else {
+        this.setState({
+          elements: [
+            (<p>Invalid ID Provided.</p>)
+          ]
+        })
+      }
+    })
+    .catch(this.errorHandler.bind(this))
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
+  }
+
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else console.dir(error)
   }
 
   renderElements(fields, res) {
@@ -74,23 +104,19 @@ class EditPage extends Component {
       fetch(`${config.base}${this.props.match.params.object}/put/${this.props.match.params.id}`, {
         method: "PUT",
         headers: {
+          Authorization: sessionStorage.getItem(session.TOKEN),
           "Content-Type": "application/json"
         },
         body: JSON.stringify(this.parseFields(data))
       })
       .then(res => {
         if (res.ok) {
-          // TODO: Update this to actual user type currently logged in
-          this.props.history.push("/dashboard/admin")
+          this.props.history.push(this.printHomePath())
         } else {
-
-          // TODO: Preferably create pretty modal
           window.alert("Looks like something went wrong, please try again later.")
         }
       })
     } else {
-
-      // TODO: Preferably create pretty modal
       window.alert("Please fill in all reamining fields.")
     }
   }
@@ -117,6 +143,10 @@ class EditPage extends Component {
     return result
   }
 
+  printHomePath() {
+    return `/dashboard/${sessionStorage.getItem(session.TYPE)}/${sessionStorage.getItem(session.ID)}`
+  }
+
   render() {
     return (
       <div>
@@ -125,8 +155,7 @@ class EditPage extends Component {
           <div className="edit-page-contents">
             <div className="edit-page-title-content">
               <h1>Edit {this.state.title}</h1>
-                {/* TODO: Update link to dashboard of currently logged in user type, e.g. Admin or employee */}
-                <Link to='/dashboard/admin'><i className="far fa-times-circle"></i></Link>
+                <Link to={this.printHomePath()}><i className="far fa-times-circle"></i></Link>
             </div>
 
             <div className="edit-page-fields">
@@ -134,8 +163,7 @@ class EditPage extends Component {
             </div>
 
             <div className="edit-page-actions">
-            {/* TODO: Update link to dashboard of currently logged in user type, e.g. Admin or employee */}
-              <Link to={`/read/${this.state.object}/${this.state.id}`} className="delete-page-cancel">Cancel</Link>
+              <Link to={this.printHomePath()} className="delete-page-cancel">Cancel</Link>
               <button onClick={this.submit.bind(this)} className="edit-page-edit">Confirm</button>
             </div>
           </div>

@@ -4,6 +4,8 @@ import Service from './../Service/Service'
 import BookingDate from './../BookingDate/BookingDate'
 import BookingConfirm from './../BookingConfirm/BookingConfirm'
 import config from '../../config'
+import { session, types } from "../../constants/types";
+import { withRouter } from 'react-router-dom'
 
 
 class BookingBar extends Component {
@@ -20,6 +22,12 @@ class BookingBar extends Component {
     }
   }
 
+  componentDidMount () {      
+    this.fetchServices(`${config.base}skills`).then(res => {
+      this.setState({services: res})  
+    })
+  }
+
   incrementStage(data) {
     this.setState({ 
       stage: this.state.stage + 1,
@@ -32,13 +40,17 @@ class BookingBar extends Component {
   }
 
   stageManager() {
-    if (this.state.stage === 0) {  
+    if (this.state.stage === 0 && this.state.services.length > 0) {  
       return (<div 
         id="landing-service-tab" 
         className="booking-bar-services" >
           {this.state.services}
         </div>
       )
+    } else if (this.state.stage === 0 && this.state.services.length === 0) {
+      return (<div className="booking-empty-services">
+        <p>No Available Services</p>
+      </div>)
     } else if (this.state.stage === 1) {
       return <BookingDate 
         incrementStage={this.incrementStage.bind(this)} 
@@ -55,20 +67,38 @@ class BookingBar extends Component {
     } 
   }
 
-  componentDidMount () {    
-    this.fetchServices(`${config.base}skills`).then(res => {
-      this.setState({services: res})  
-    })
-  }
-
   async fetchServices(url) {
     
-    const raw = await fetch(url)
+    const raw = await fetch(url, {
+        headers: {
+          Authorization: sessionStorage.getItem(session.TOKEN)
+        }
+      })
+      .then(this.validateStatus)
       .then(res => res.json())
-      .catch(err => { return {error: true, message: err.message} })
+      .catch(err => this.errorHandler.bind(this))
     const error = raw['error'] !== undefined && raw['error']
 
     return error ? this.errorBox() : this.mapService(raw);
+  }
+
+  validateStatus(response) {
+    if (response.status >= 400) {
+      throw response.status
+    }
+
+    return response
+  }
+
+  errorHandler(error) {
+    if (error === 401) {
+      this.props.history.push("/")
+      sessionStorage.setItem(session.LOGIN, 0)
+      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+    } else return {error: true, message: error.message}
   }
 
   mapService(data) {
@@ -125,4 +155,4 @@ class BookingBar extends Component {
 
 }
 
-export default BookingBar
+export default withRouter(BookingBar)
