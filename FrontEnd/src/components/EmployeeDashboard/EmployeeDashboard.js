@@ -120,81 +120,88 @@ class EmployeeDashboard extends Component {
       {/* HEADER */}
       <Header></Header>
 
-      <div className="customer-dashboard-inner">
-        <div className="customer-dashboard-container">
-          
-          {/* USER INFO */}
-          <div className="customer-dashboard-personal-info">
-            <h1>Hello, {this.state.fname}</h1>
-            <div>
-              <div className="customer-dashboard-data">
-                <p className="customer-dashboard-title">First Name</p>
-                <p className="customer-dashboard-title">Last Name</p>
-                <p className="customer-dashboard-title">UserName</p>
-              </div>
-              <div className="customer-dashboard-data customer-dashboard-spacer">
-                <p>{this.state.fname}</p>
-                <p>{this.state.lname}</p>
-              <p>{this.state.userName}</p>
-              </div>
-            </div>
-            <div>
-              <div className="customer-dashboard-data">
-                  <p className="customer-dashboard-title">Password</p>
-                  <p className="customer-dashboard-title">Address</p>
-                  <p className="customer-dashboard-title">Phone Number</p>
-                </div>
+      <body>
+
+        <div className="customer-dashboard-inner">
+          <div className="customer-dashboard-container">
+            
+            {/* USER INFO */}
+            <div className="customer-dashboard-personal-info">
+              <h1>Hello, {this.state.fname}</h1>
+              <div>
                 <div className="customer-dashboard-data">
-                  <p>{this.state.password}</p>
-                  <p>123 Street, Melb, Victoria</p>
-                  <p>+61 123 123 123</p>
+                  <p className="customer-dashboard-title">First Name</p>
+                  <p className="customer-dashboard-title">Last Name</p>
+                  <p className="customer-dashboard-title">UserName</p>
                 </div>
+                <div className="customer-dashboard-data customer-dashboard-spacer">
+                  <p>{this.state.fname}</p>
+                  <p>{this.state.lname}</p>
+                <p>{this.state.userName}</p>
+                </div>
+              </div>
+              <div>
+                <div className="customer-dashboard-data">
+                    <p className="customer-dashboard-title">Password</p>
+                    <p className="customer-dashboard-title">Address</p>
+                    <p className="customer-dashboard-title">Phone Number</p>
+                  </div>
+                  <div className="customer-dashboard-data">
+                    <p>{this.state.password}</p>
+                    <p>123 Street, Melb, Victoria</p>
+                    <p>+61 123 123 123</p>
+                  </div>
+              </div>
+              <Link className="customer-dashboard-edit-btn" to={`/update/employee/${this.state.id}`}><span>Edit</span></Link>
             </div>
-            <Link className="customer-dashboard-edit-btn" to={`/update/employee${this.state.id}`}><span>Edit</span></Link>
-          </div>
 
-          {/* TABLE */}
-          <div className="customer-dashboard-table-container">
-            <table className="customer-dashboard-table">
-              <tbody>
-                <tr>
-                  <th>Schedule ID</th>
-                  <th>Empoyee ID</th>
-                  <th>Skill ID</th>
-                  <th>Capacity</th>
-                  <th>Price</th>
-                  <th>Availability</th>
-                  <th>Starting Hour</th>
-                  <th>Length</th>
-                  <th>Created At</th>
-                  <th>Updated At</th>
-                </tr>
-                {this.state.schedule}
-              </tbody>
-            </table>
-          </div>
+            {/* TABLE */}
+            <div className="customer-dashboard-table-container">
+              <h3>{this.state.fname}'s Schedule</h3>
+              <table className="customer-dashboard-table">
+                <tbody>
+                  <tr>
+                    <th>Schedule ID</th>
+                    <th>Empoyee ID</th>
+                    <th>Skill ID</th>
+                    <th>Capacity</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th>Starting Hour</th>
+                    <th>Length</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                  </tr>
+                  {this.state.schedule}
+                </tbody>
+              </table>
+            </div>
 
-          <div className="customer-dashboard-table-container">
-            <table className="customer-dashboard-table">
-              <tbody>
-                <tr>
-                  <th>Skill ID</th>
-                  <th>Skill Name</th>
-                  <th>Title</th>
-                  <th>Image Src</th>
-                  <th>Description</th>
-                  <th>Length</th>
-                  <th>Cost</th>
-                  <th>Created At</th>
-                  <th>Updated At</th>
-                </tr>
-                {this.state.skills}
-              </tbody>
-            </table>
+            
+            {/* TABLE - skills */}
+            <div className="customer-dashboard-table-container">
+            <h3>{this.state.fname}'s Skills</h3>
+              <table className="customer-dashboard-table">
+                <tbody>
+                  <tr>
+                    <th>Skill ID</th>
+                    <th>Skill Name</th>
+                    <th>Title</th>
+                    <th>Image Src</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <th>Cost</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                  </tr>
+                  {this.state.skills}
+                </tbody>
+              </table>
+            </div>
+            
           </div>
-
         </div>
-      </div>
+      </body>
 
 
       {/* FOOTER */}
