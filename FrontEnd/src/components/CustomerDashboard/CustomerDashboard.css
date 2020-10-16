@@ -1,0 +1,118 @@
+.customer-dashboard-box {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
+.customer-dashboard-inner {
+  background-color: whitesmoke;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-dashboard-container {
+  display: flex;
+  flex-flow: column;
+  width: 80%;
+  margin: 50px 0;
+  padding: 2%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* PERSONAL INFO */
+
+.customer-dashboard-personal-info {
+  padding: 2%;
+  background-color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.customer-dashboard-data {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.customer-dashboard-data * {
+  flex: 1;
+  margin: 2px;
+}
+
+.customer-dashboard-spacer {
+  margin-bottom: 20px;
+}
+
+.customer-dashboard-title {
+  text-decoration: underline;
+}
+
+/* BUTTON */
+
+.customer-dashboard-edit-btn {
+  margin-top: 50px;
+}
+
+.customer-dashboard-edit-btn {
+  border: 2px solid lightseagreen;
+  color: lightseagreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  transition: 0.5s;
+}
+
+.customer-dashboard-edit-btn:hover {
+  background-color: rgba(32, 178, 171, 0.7);
+  color: white;
+  transition: 0.5s;
+}
+
+/* TABLE */
+
+.customer-dashboard-table-container {
+  overflow: auto;
+}
+
+.customer-dashboard-table1 {
+  display: table;
+  background-color: white;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: auto;
+}
+
+.customer-dashboard-table1 tr {
+  width: 100%;
+  transition: 0.5s;
+  justify-content: space-between;
+  color: black;
+}
+
+.customer-dashboard-table1 tr * {
+  padding: 10px;
+  color: inherit;
+}
+
+.customer-dashboard-table1 tr th {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.customer-dashboard-table1 tr:nth-child(even) {
+  background-color: rgba(211, 211, 211, 0.5);
+}
+
+.customer-dashboard-record:hover {
+  transition: 0.5s;
+  background-color: rgba(15, 15, 15, 0.6) !important;
+  color: white;
+}
