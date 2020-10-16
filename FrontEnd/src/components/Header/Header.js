@@ -10,7 +10,9 @@ class Header extends Component {
     super()
     
     this.state = {
-      login: 0
+      login: sessionStorage.getItem(session.ID),
+      username: "",
+      password: ""
     }
   }
 
@@ -31,6 +33,8 @@ class Header extends Component {
     sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
     sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
 
+    this.setState({ login: 0 })
+
     if (window.location.pathname === "/") {
       window.location.reload()
     } else {
@@ -48,22 +52,28 @@ class Header extends Component {
     )
   }
 
+  onChange(e) {
+    this.setState({
+      [`${e.target.title}`]: e.target.value
+    })
+  }
+
   login() {
     return (
       <div className="header-inner-content login-fields">
-        <input className="header-login-input" type="text" placeholder="Username.."></input>
-        <input className="header-login-input" type="password" placeholder="Password.."></input>
+        <input title="username" onChange={this.onChange.bind(this)} className="header-login-input" type="text" placeholder="Username.."></input>
+        <input title="password" onChange={this.onChange.bind(this)} className="header-login-input" type="password" placeholder="Password.."></input>
         <button className="header-login" onClick={this.validateLogin.bind(this)} to={`/dashboard/${sessionStorage.getItem(session.TYPE)}`}><i className="header-login-icon fas fa-sign-in-alt"></i></button>
         
       </div>
     )
   }
 
-  validateLogin() {
-    const username = document.querySelectorAll(".header-login-input")[0].value
-    const password = document.querySelectorAll(".header-login-input")[1].value 
-
-    fetch(config.base + "customer/login", {
+  async validateLogin() {
+    const username = this.state.username
+    const password = this.state.password
+    this.setState({ login: 1 })
+    await fetch(config.base + "customer/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -74,10 +84,9 @@ class Header extends Component {
     .then(this.validateStatus)
     .then(res => this.storeUpdates(res, username))
     .then(res => this.storePersonUpdates(res, username))
-    .then(res => {
-      this.props.history.push(this.urlBuilder(res.type))
-    })
+    .then(res => this.props.history.push(this.urlBuilder(res.type)))
     .catch(err => {
+      this.setState({ login: 1 })
       this.props.history.push("/")
     })
   }
@@ -102,7 +111,7 @@ class Header extends Component {
     })
     .then(res => res.json())
     .then(res => Array.isArray(res) ? res : [res])
-    .then(res => res.filter(p => p.userName === username))
+    .then(res => res.filter(p => p.userName === username ))
     .then(async res => {
       sessionStorage.setItem(session.NAME, res[0].fname)
       sessionStorage.setItem(session.ID, res[0].id)

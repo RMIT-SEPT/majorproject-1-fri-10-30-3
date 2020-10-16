@@ -45,7 +45,7 @@ class Home extends Component {
         </div>
 
         <div id="services" className="landing-containers landing-services"> {/* SERVICES */} 
-          <BookingBar></BookingBar>
+          <BookingBar history={this.props.history}></BookingBar>
         </div>
 
         <div id="aboutus" className="landing-containers landing-about-us"> {/* ABOUT US */} 
