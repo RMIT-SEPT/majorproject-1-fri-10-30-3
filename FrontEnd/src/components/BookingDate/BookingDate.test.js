@@ -3,6 +3,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import Enzyme, { shallow } from 'enzyme'
 
 import BookingDate from './BookingDate'
+import sessionStorage from '../../constants/globalSessionMock'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -18,11 +19,20 @@ const timeFixture = [
   }
 ]
 
+const mockSessionStorage = {
+  type: "Employee",
+  id: 0,
+  token: "Bearer abc123"
+}
+
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve(),
   })
 )
+
+sessionStorage.data = mockSessionStorage
+global.sessionStorage = sessionStorage
 
 describe('BookingDate', () => {
   

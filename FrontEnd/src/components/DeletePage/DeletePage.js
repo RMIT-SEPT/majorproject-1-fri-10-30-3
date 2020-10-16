@@ -70,7 +70,7 @@ class DeletePage extends Component {
             <h1>{this.state.title} - ID: {this.state.id}</h1>
             <p>Are you sure you want to delete this {this.state.object} record?</p>
             <div className="delete-page-actions">
-              <Link to={`dashboard/${sessionStorage.getItem(session.TYPE)}/${sessionStorage.getItem(session.ID)}`} className="delete-page-cancel">Cancel</Link>
+              <Link to={`/dashboard/${sessionStorage.getItem(session.TYPE)}/${sessionStorage.getItem(session.ID)}`} className="delete-page-cancel">Cancel</Link>
               <Link onClick={this.deleteRecord.bind(this)} to={`/dashboard/admin`} className="delete-page-confirm">Confirm</Link>
             </div>
           </div>

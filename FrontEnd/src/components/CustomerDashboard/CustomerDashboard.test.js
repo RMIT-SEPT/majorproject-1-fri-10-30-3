@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import CustomerDashboard from './CustomerDashboard'
 import config from '../../config'
+import sessionStorage from '../../constants/globalSessionMock'
 
 Enzyme.configure({ adapter: new Adapter() })
 const booking = [{
@@ -40,7 +41,7 @@ const customers = {
   records: booking
 }
 
-const headings = [ "First Name", "Last Name", "UserName", "Password", "Address", "Phone Number" ]
+const headings = [ "First Name", "Last Name", "UserName", "ID", "Address", "Phone Number" ]
 const bookingHeadings = [ "Date", "Time", "ID", "Employee", "Skill" ]
 
 global.fetch = jest.fn(() =>
@@ -48,6 +49,15 @@ global.fetch = jest.fn(() =>
     json: () => Promise.resolve(),
   })
 )
+
+const mockSessionStorage = {
+  type: "Customer",
+  id: 3,
+  token: "Bearer abc123"
+}
+
+sessionStorage.data = mockSessionStorage
+global.sessionStorage = sessionStorage
 
 const setup = () => {
   const mockCustomerPromise = Promise.resolve(customers)

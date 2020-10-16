@@ -2,6 +2,7 @@ import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import ReadPage from './ReadPage'
+import sessionStorage from '../../constants/globalSessionMock'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -32,6 +33,15 @@ global.fetch = jest.fn(() =>
     json: () => Promise.resolve(),
   })
 )
+
+const mockSessionStorage = {
+  type: "Customer",
+  id: 0,
+  token: "Bearer abc123"
+}
+
+sessionStorage.data = mockSessionStorage
+global.sessionStorage = sessionStorage
 
 const setup = (data) => {
   const mockPromise = Promise.resolve(data)

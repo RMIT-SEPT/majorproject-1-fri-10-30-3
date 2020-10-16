@@ -50,7 +50,7 @@ class EditPage extends Component {
       } else {
         this.setState({
           elements: [
-            (<p>Invalid ID Provided.</p>)
+            (<p key="1">Invalid ID Provided.</p>)
           ]
         })
       }
@@ -61,9 +61,7 @@ class EditPage extends Component {
   validateStatus(response) {
     if (response.status >= 400) {
       throw response.status
-    }
-
-    return response
+    } else return response
   }
 
   errorHandler(error) {

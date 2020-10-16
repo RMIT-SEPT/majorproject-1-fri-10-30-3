@@ -1,8 +1,8 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme, { shallow } from 'enzyme'
-
 import BookingBar from './BookingBar'
+import sessionStorage from '../../constants/globalSessionMock'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -24,18 +24,26 @@ global.fetch = jest.fn(() =>
   })
 )
 
+const mockSessionStorage = {
+  type: "Customer",
+  id: 0,
+  token: "Bearer abc123"
+}
+
+sessionStorage.data = mockSessionStorage
+global.sessionStorage = sessionStorage
+
 describe('BookingBar', () => {
   
-  it('fetches the services list and stores it within state', done => {
+  it('fetches the services list and displays it', done => {
     const mockJsonPromise = Promise.resolve(skillFixture)
     const mockFetchPromise = Promise.resolve({
       json: () => mockJsonPromise,
     })
     
     jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise)
-    
     const wrapper = shallow(<BookingBar />) 
-                          
+                        
     process.nextTick(() => {
       const props = wrapper.state().services[0].props
       const keys = ['title', 'description', 'cost', 'length']
