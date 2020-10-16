@@ -3,6 +3,7 @@ package com.rmit.sept.fri_10_30_3.majorproject.services;
 import com.rmit.sept.fri_10_30_3.majorproject.Repositories.CustomerRepository;
 import com.rmit.sept.fri_10_30_3.majorproject.execptions.UsernameAlreadyExistsException;
 import com.rmit.sept.fri_10_30_3.majorproject.model.Customer;
+import com.rmit.sept.fri_10_30_3.majorproject.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,4 +39,6 @@ public class CustomerService {
     public Iterable<Customer> findAll(){return customerRepository.findAll();}
 
     public Optional<Customer> findByID(long id){return customerRepository.findById(id);}
+
+    public Optional<Customer> deleteById(long id){return customerRepository.deleteById(id);}
 }
