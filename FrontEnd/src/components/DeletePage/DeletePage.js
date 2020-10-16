@@ -50,8 +50,14 @@ class DeletePage extends Component {
     return response
   }
 
+  getObject() {
+    if (this.state.object === "booking") {
+      return "enrollment"
+    } else return this.state.object
+  }
+
   deleteRecord() {
-    fetch(`${config.base}${this.state.object}/delete/${this.state.id}`, {
+    fetch(`${config.base}${this.getObject()}/delete/${this.state.id}`, {
       method: 'DELETE',
       headers: {
         Authorization: sessionStorage.getItem(session.TOKEN),

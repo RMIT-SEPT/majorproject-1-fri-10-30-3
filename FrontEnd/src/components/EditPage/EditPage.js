@@ -37,7 +37,7 @@ class EditPage extends Component {
   }
 
   buildElement() {
-    fetch(structs[this.props.match.params.object].url + "/" + sessionStorage.getItem(session.ID), {
+    fetch(structs[this.props.match.params.object].url + "/" + this.props.match.params.id, {
       headers: {
         Authorization: sessionStorage.getItem(session.TOKEN),
       }

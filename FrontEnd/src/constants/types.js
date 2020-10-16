@@ -88,8 +88,8 @@ const schedule = {
   title: 'Schedule',
   url: base + "schedule",
   fields: [
-    { name: "employee", placeholder: "Employee ID", type: dataTypes.NUMBER, editable: true },
-    { name: "skills", placeholder: "Skills ID", type: dataTypes.NUMBER, editable: true },
+    { name: "employee", placeholder: "Employee ID", type: dataTypes.NUMBER, editable: false },
+    { name: "skills", placeholder: "Skills ID", type: dataTypes.NUMBER, editable: false },
     { name: "capacity", placeholder: "Capacity", type: dataTypes.NUMBER, editable: true },
     { name: "price", placeholder: "Price", type: dataTypes.NUMBER, editable: true },
     { name: "availability", placeholder: "Availability", type: dataTypes.DATE, editable: true },
