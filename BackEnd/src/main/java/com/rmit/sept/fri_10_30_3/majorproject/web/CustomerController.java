@@ -106,4 +106,15 @@ public class CustomerController {
             return new ResponseEntity<Customer>(customer, HttpStatus.NO_CONTENT);
         }
     }
+
+    @DeleteMapping("delete/{id}")
+    public String deleteById(@PathVariable long id){
+        Optional<Customer> e = customerService.findByID(id);
+        if(e.isPresent()){
+            customerService.deleteById(id);
+            return e.get().getUserName();
+        }else{
+            return "NOT FOUND";
+        }
+    }
 }
