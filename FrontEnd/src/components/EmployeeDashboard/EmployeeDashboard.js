@@ -19,7 +19,7 @@ class EmployeeDashboard extends Component {
       password: '',
       phone: '',
       address: '',
-      id: props.match.params.id,
+      id: sessionStorage.getItem(session.ID),
       schedule: [],
       skills: []
     }
@@ -166,14 +166,14 @@ class EmployeeDashboard extends Component {
               </div>
               <div>
                 <div className="employee-dashboard-data">
-                    <p className="employee-dashboard-title">ID</p>
-                    <p className="employee-dashboard-title">Address</p>
-                    <p className="employee-dashboard-title">Phone Number</p>
+                    <p className="employee-dashboard-title"></p>
+                    <p className="employee-dashboard-title"></p>
+                    <p className="employee-dashboard-title"></p>
                   </div>
                   <div className="employee-dashboard-data">
-                    <p>{this.state.id}</p>
-                    <p>{this.state.address}</p>
-                    <p>{this.state.phone}</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
                   </div>
               </div>
               <Link className="employee-dashboard-edit-btn" to={`/update/employee/${this.state.id}`}><span>Edit</span></Link>
@@ -186,7 +186,7 @@ class EmployeeDashboard extends Component {
                 <tbody>
                   <tr>
                     <th>Schedule ID</th>
-                    <th>Empoyee ID</th>
+                    <th>Employee ID</th>
                     <th>Skill ID</th>
                     <th>Capacity</th>
                     <th>Price</th>
