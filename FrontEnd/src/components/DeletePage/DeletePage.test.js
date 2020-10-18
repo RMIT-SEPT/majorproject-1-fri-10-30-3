@@ -2,6 +2,8 @@ import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import DeletePage from './DeletePage'
+import sessionStorage from '../../constants/globalSessionMock'
+import config from '../../config'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -17,6 +19,15 @@ const params = {
     object: 'customer'
   }
 }
+
+const mockSessionStorage = {
+  type: "Customer",
+  id: 3,
+  token: "Bearer abc123"
+}
+
+sessionStorage.data = mockSessionStorage
+global.sessionStorage = sessionStorage
 
 describe('<DeletePage />', () => {
   
@@ -35,8 +46,8 @@ describe('<DeletePage />', () => {
 
     function execute(url, options) {
       process.nextTick(() => {
-        const expectUrl = "http://54.210.18.102:8080/api/customer/delete/3" 
-        const expectMethod = { method: 'DELETE' }
+        const expectUrl = config.base + "customer/delete/3" 
+        const expectMethod = { method: 'DELETE', headers: {Authorization: "Bearer abc123"} }
       
         expect(url).toBe(expectUrl)
         expect(options).toEqual(expectMethod)

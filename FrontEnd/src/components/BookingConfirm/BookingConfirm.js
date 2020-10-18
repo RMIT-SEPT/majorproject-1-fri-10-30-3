@@ -62,41 +62,47 @@ class BookingConfirm extends Component {
   async customerCreation() {
     const data = document.querySelectorAll(".booking-signup-input")
 
-    await fetch(config.base + "customer/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fname: data[0].value,
-        lname: data[1].value,
-        address: data[2].value,
-        phone: data[3].value,
-        userName: data[4].value,
-        password: data[5].value,
-        confirmPassword: data[6].value
+    if (data[5].value.length < 6) {
+      window.alert("Password must be 6 or more characters.")
+    } else if (data[5].value !== data[6].value) {
+      window.alert("Passwords are not matching.")
+    } else {
+      await fetch(config.base + "customer/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fname: data[0].value,
+          lname: data[1].value,
+          address: data[2].value,
+          phone: data[3].value,
+          userName: data[4].value,
+          password: data[5].value,
+          confirmPassword: data[6].value
+        })
       })
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      } else throw res.status
-    })
-    .then(res => {
-      sessionStorage.setItem(session.LOGIN, 0)
-      sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
-      sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
-      sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
-      sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
-      this.loginAndBook()
-    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        } else throw res.status
+      })
+      .then(res => {
+        sessionStorage.setItem(session.LOGIN, 0)
+        sessionStorage.setItem(session.TYPE, types.credentials.DEFAULT)
+        sessionStorage.setItem(session.NAME, types.credentials.DEFAULT)
+        sessionStorage.setItem(session.TOKEN, types.credentials.DEFAULT)
+        sessionStorage.setItem(session.ID, types.credentials.DEFAULT)
+        this.loginAndBook()
+      })
+    }
   }
 
   loginAndBook() {
     const data = Array.from(document.querySelectorAll(".booking-signup-input")).filter(p => p.title === "password" || p.title === "userName")
     const username = data[0].value
     const password = data[1].value 
-
+    
     fetch(config.base + "customer/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
